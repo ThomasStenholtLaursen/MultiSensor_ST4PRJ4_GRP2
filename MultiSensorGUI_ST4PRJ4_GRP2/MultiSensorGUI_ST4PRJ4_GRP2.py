@@ -1,31 +1,189 @@
+from __future__ import annotations
 from tkinter import *
 import tkinter as tk
-import ObserverPattern as ob
 import threading as t
+from abc import ABC, abstractmethod
+from random import randrange
+from typing import List
+import time as time
 
 GREEN = '#00ff30'
 
 root = tk.Tk()
 
+
+SLEEPBUSINESS = 0.5
+
+
+class Subject(ABC):
+    @abstractmethod
+    def attach(self, observer: Observer) -> None:
+        pass
+
+    @abstractmethod
+    def detach(self, observer: Observer) -> None:        
+        pass
+
+    @abstractmethod
+    def notify(self) -> None:        
+        pass
+
+class ConcreteSubjectLeft(Subject):
+    
+    _state: int = None
+    
+    _observers: List[Observer] = []
+    
+    def attach(self, observer: Observer) -> None:        
+        self._observers.append(observer)
+
+    def detach(self, observer: Observer) -> None:
+        self._observers.remove(observer)
+
+    def notify(self) -> None:
+        for observer in self._observers:
+            observer.update(self)
+
+    def some_business_logic(self) -> None:        
+        for x in range(50):            
+            self._state = randrange(0, 4)            
+            self.notify()
+            time.sleep(SLEEPBUSINESS)
+
+class ConcreteSubjectRight(Subject):
+   
+    _state: int = None
+    
+    _observers: List[Observer] = []
+    
+    def attach(self, observer: Observer) -> None:       
+        self._observers.append(observer)
+
+    def detach(self, observer: Observer) -> None:
+        self._observers.remove(observer)
+
+    def notify(self) -> None:
+        for observer in self._observers:
+            observer.update(self)
+
+    def some_business_logic(self) -> None:        
+        for x in range(50):            
+            self._state = randrange(0, 4)            
+            self.notify()
+            time.sleep(SLEEPBUSINESS)
+        
+class ConcreteSubjectTop(Subject):
+    
+    _state: int = None
+    
+    _observers: List[Observer] = []
+    
+    def attach(self, observer: Observer) -> None:        
+        self._observers.append(observer)
+
+    def detach(self, observer: Observer) -> None:
+        self._observers.remove(observer)
+
+    def notify(self) -> None:
+        for observer in self._observers:
+            observer.update(self)
+
+    def some_business_logic(self) -> None:       
+        for x in range(50):
+            self._state = randrange(0, 4)
+            self.notify()
+            time.sleep(SLEEPBUSINESS)
+
+class ConcreteSubjectBottom(Subject):
+    
+    _state: int = None
+    
+    _observers: List[Observer] = []
+    
+    def attach(self, observer: Observer) -> None:
+        self._observers.append(observer)
+
+    def detach(self, observer: Observer) -> None:
+        self._observers.remove(observer)
+
+    def notify(self) -> None:
+        for observer in self._observers:
+            observer.update(self)
+
+    def some_business_logic(self) -> None:        
+        for x in range(50):
+            self._state = randrange(0, 4)
+            self.notify()
+            time.sleep(SLEEPBUSINESS)
+
+class ConcreteSubjectTemp(Subject):
+    
+    _state: int = None
+    
+    _observers: List[Observer] = []
+    
+    def attach(self, observer: Observer) -> None:
+        self._observers.append(observer)
+
+    def detach(self, observer: Observer) -> None:
+        self._observers.remove(observer)
+
+    def notify(self) -> None:        
+        for observer in self._observers:
+            observer.update(self)
+
+    def some_business_logic(self) -> None:        
+        for x in range(50):
+            self._state = randrange(10, 100)
+            self.notify()
+            time.sleep(SLEEPBUSINESS)
+
+class ConcreteSubjectLight(Subject):
+    
+    _state: int = None
+    
+    _observers: List[Observer] = []
+    
+    def attach(self, observer: Observer) -> None:
+        self._observers.append(observer)
+
+    def detach(self, observer: Observer) -> None:
+        self._observers.remove(observer)
+
+    def notify(self) -> None:
+        for observer in self._observers:
+            observer.update(self)
+
+    def some_business_logic(self) -> None:        
+        for x in range(50):
+            self._state = randrange(0, 50)
+            self.notify()
+            time.sleep(SLEEPBUSINESS)
+
+class Observer(ABC):
+    @abstractmethod
+    def update(self, subject: Subject) -> None:        
+        pass
+
 #Test functions for observer pattern
 #region
 def obtest1():
-    ob.subject_left.some_business_logic()
+    subject_left.some_business_logic()
 
 def obtest2():
-    ob.subject_right.some_business_logic()
+    subject_right.some_business_logic()
 
 def obtest3():
-    ob.subject_top.some_business_logic()
+    subject_top.some_business_logic()
 
 def obtest4():
-    ob.subject_bottom.some_business_logic()
+    subject_bottom.some_business_logic()
 
 def obtest5():
-    ob.subject_temp.some_business_logic()
+    subject_temp.some_business_logic()
 
 def obtest6():
-    ob.subject_light.some_business_logic()
+    subject_light.some_business_logic()
 #endregion
 
 #Color functions
@@ -141,8 +299,8 @@ temp_label.place(y=300, x=130)
 
 #Observers
 #region
-class ConcreteObserverLeft(ob.Observer):
-    def update(self, subject: ob.Subject) -> None:
+class ConcreteObserverLeft(Observer):
+    def update(self, subject: Subject) -> None:
         if subject._state <= 1:           
             greenLeft()
             print("Left Indicator: ", subject._state)
@@ -150,8 +308,8 @@ class ConcreteObserverLeft(ob.Observer):
             redLeft()
             print("Left Indicator: ", subject._state)
 
-class ConcreteObserverRight(ob.Observer):
-    def update(self, subject: ob.Subject) -> None:
+class ConcreteObserverRight(Observer):
+    def update(self, subject: Subject) -> None:
         if subject._state <= 2:           
             greenRight()
             print("Right Indicator: ", subject._state)
@@ -159,8 +317,8 @@ class ConcreteObserverRight(ob.Observer):
             redRight()
             print("Right Indicator: ", subject._state)
 
-class ConcreteObserverTop(ob.Observer):
-    def update(self, subject: ob.Subject) -> None:
+class ConcreteObserverTop(Observer):
+    def update(self, subject: Subject) -> None:
         if subject._state <= 2:           
             greenTop()
             print("Top Indicator: ", subject._state)
@@ -168,8 +326,8 @@ class ConcreteObserverTop(ob.Observer):
             redTop()
             print("Top Indicator: ", subject._state)
 
-class ConcreteObserverBottom(ob.Observer):
-    def update(self, subject: ob.Subject) -> None:
+class ConcreteObserverBottom(Observer):
+    def update(self, subject: Subject) -> None:
         if subject._state <= 2:           
             greenBottom()
             print("Bottom Indicator: ", subject._state)
@@ -177,8 +335,8 @@ class ConcreteObserverBottom(ob.Observer):
             redBottom()
             print("Bottom Indicator: ", subject._state)
 
-class ConcreteObserverTemp(ob.Observer):
-    def update(self, subject: ob.Subject) -> None:
+class ConcreteObserverTemp(Observer):
+    def update(self, subject: Subject) -> None:
         temp_label.configure(text=subject._state)
         if subject._state < 50:
             temp_label.configure(fg=GREEN)
@@ -187,8 +345,8 @@ class ConcreteObserverTemp(ob.Observer):
             temp_label.configure(fg='red')
             print("Temp Indicator: ", subject._state)
 
-class ConcreteObserverLight(ob.Observer):
-    def update(self, subject: ob.Subject) -> None:
+class ConcreteObserverLight(Observer):
+    def update(self, subject: Subject) -> None:
         if subject._state > 25:
             light.configure(bg=GREEN)
             print("Light Indicator: ", subject._state)
@@ -199,30 +357,30 @@ class ConcreteObserverLight(ob.Observer):
 
 #Attaching observers
 #region
-ob.subject_left = ob.ConcreteSubjectLeft()
-ob.subject_right = ob.ConcreteSubjectRight()
-ob.subject_top = ob.ConcreteSubjectTop()
-ob.subject_bottom = ob.ConcreteSubjectBottom()
-ob.subject_temp = ob.ConcreteSubjectTemp()
-ob.subject_light = ob.ConcreteSubjectLight()
+subject_left = ConcreteSubjectLeft()
+subject_right = ConcreteSubjectRight()
+subject_top = ConcreteSubjectTop()
+subject_bottom = ConcreteSubjectBottom()
+subject_temp = ConcreteSubjectTemp()
+subject_light = ConcreteSubjectLight()
 
 observer_left = ConcreteObserverLeft()
-ob.subject_left.attach(observer_left)
+subject_left.attach(observer_left)
 
 observer_right = ConcreteObserverRight()
-ob.subject_right.attach(observer_right)
+subject_right.attach(observer_right)
 
 observer_top = ConcreteObserverTop()
-ob.subject_top.attach(observer_top)
+subject_top.attach(observer_top)
 
 observer_bottom = ConcreteObserverBottom()
-ob.subject_bottom.attach(observer_bottom)
+subject_bottom.attach(observer_bottom)
 
 observer_temp = ConcreteObserverTemp()
-ob.subject_temp.attach(observer_temp)
+subject_temp.attach(observer_temp)
 
 observer_light = ConcreteObserverLight()
-ob.subject_light.attach(observer_light)
+subject_light.attach(observer_light)
 #endregion
 #endregion
 
