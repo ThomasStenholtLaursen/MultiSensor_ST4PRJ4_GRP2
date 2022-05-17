@@ -8,11 +8,10 @@ from random import randrange
 from typing import List
 import time as time
 
-GREEN = '#00ff30'
-
 root = tk.Tk()
 root.title("MainWindow")
 
+GREEN = '#00ff30'
 SLEEPBUSINESS = 0.5
 HEIGHT = 480
 WIDTH = 800
@@ -41,13 +40,6 @@ def obtest6():
     subject_light.some_business_logic()
 #endregion
 
-def exitMainWindow():
-    if messagebox.askokcancel("Exit", "Are you sure you want to exit?"):
-        root.destroy()
-
-def returnSettingsWindow():
-        if messagebox.askokcancel("Return", "Are you sure you want to return"):
-            settingsWindow.destroy()
 
 #Color functions
 #region
@@ -91,8 +83,13 @@ def greenBottom():
 #GUI
 #region
 
+def exitMainWindow():
+    if messagebox.askokcancel("Exit", "Are you sure you want to exit?"):
+        root.destroy()
+
 #Settings Window
 #region
+
 def OpenSettingsWindow():
 
     #New settins window
@@ -112,20 +109,24 @@ def OpenSettingsWindow():
     sframe.place(relwidth=1, y=410, height=70)
 
     #'Return' and 'save' buttons for settings window
-    button_one = tk.Button(sframe, text="Return",
+    returnButton = tk.Button(sframe, text="Return",
                       font=("Segoe UI",20), bd='0', width=20, height=30, 
                        bg='#08b4b5', fg='#ffd200', 
                        activebackground='#077e7f', 
-                       activeforeground='#ffffff',
-                       command=returnSettingsWindow)
-    button_one.pack(side=tk.LEFT, expand=True)
+                       activeforeground='#ffffff')                       
+    returnButton.pack(side=tk.LEFT, expand=True)
 
-    button_two = tk.Button(sframe, text="Save",
+    saveButton = tk.Button(sframe, text="Save",
                       font=("Segoe UI",20), bd='0', width=20, height=30, 
                        bg='#08b4b5', fg='#00ff12', 
                        activebackground='#077e7f', 
                        activeforeground='#ffffff')                       
-    button_two.pack(side=tk.RIGHT, expand=True)
+    saveButton.pack(side=tk.RIGHT, expand=True)
+
+    testButton1 = tk.Button(settingsWindow, width=10, height=4)
+    testButton1.place(y=48, x=340)
+    testButton2 = tk.Button(settingsWindow, width=10, height=4)
+    testButton2.place(y=48, x=250)
 
     settingsWindow.mainloop()
 
@@ -169,22 +170,22 @@ frame.configure(bg='#424242')
 frame.place(relwidth=1, y=410, height=70)
 
 #left button root
-button_one = tk.Button(frame, text="EXIT",
+exitButton = tk.Button(frame, text="EXIT",
                       font=("Segoe UI",20), bd='0', width=20, height=30, 
                        bg='#08b4b5', fg='#ffffff', 
                        activebackground='#077e7f', 
                        activeforeground='#ffffff',
                        command=exitMainWindow)
-button_one.pack(side=tk.LEFT, expand=True)
+exitButton.pack(side=tk.LEFT, expand=True)
 
 #right button root
-button_two = tk.Button(frame, text="Settings",
+settingsButton = tk.Button(frame, text="Settings",
                       font=("Segoe UI",20), bd='0', width=20, height=30, 
                        bg='#08b4b5', fg='#ffffff', 
                        activebackground='#077e7f', 
                        activeforeground='#ffffff',
                        command=OpenSettingsWindow)
-button_two.pack(side=tk.RIGHT, expand=True)
+settingsButton.pack(side=tk.RIGHT, expand=True)
 #endregion
 
 #Temperature and Light labels mainWindow
@@ -346,7 +347,6 @@ class Observer(ABC):
     def update(self, subject: Subject) -> None:        
         pass
 #endregion
-
 
 #Observers
 #region
