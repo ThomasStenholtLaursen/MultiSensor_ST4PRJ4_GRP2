@@ -10,10 +10,15 @@ import time as time
 GREEN = '#00ff30'
 
 root = tk.Tk()
+root.title("MainWindow")
 
 SLEEPBUSINESS = 0.5
+HEIGHT = 480
+WIDTH = 800
 
-#fullscreen for RPI
+
+
+#fullscreen for RPI - next line needs to be included when running with display on RPI
 #root.attributes('-fullscreen', True)
 
 #region Subject and Observer
@@ -232,22 +237,58 @@ def greenBottom():
 #GUI
 #region
 
+#Settings Window
+#region
+def OpenSettingsWindow():
+
+    settingsWindow = tk.Toplevel(root)
+    settingsWindow.minsize(WIDTH, HEIGHT)
+    settingsWindow.maxsize(WIDTH, HEIGHT)
+
+    settingsWindow.title("SettingsWindow")
+
+    settingsBackground_image = tk.PhotoImage(file='template_settingsbackground.png')
+    settingsBackground_label = tk.Label(settingsWindow, image = settingsBackground_image)
+    settingsBackground_label.place(relwidth=1, relheight=1)
+
+    sframe = tk.Frame(settingsWindow)
+    sframe.configure(bg='#424242')
+    sframe.place(relwidth=1, y=410, height=70)
+
+    button_one = tk.Button(sframe, text="Return",
+                      font=("Segoe UI",20), bd='0', width=20, height=30, 
+                       bg='#08b4b5', fg='#ffd200', 
+                       activebackground='#077e7f', 
+                       activeforeground='#ffffff',
+                       command=settingsWindow.destroy)
+    button_one.pack(side=tk.LEFT, expand=True)
+
+    button_two = tk.Button(sframe, text="Save",
+                      font=("Segoe UI",20), bd='0', width=20, height=30, 
+                       bg='#08b4b5', fg='#00ff12', 
+                       activebackground='#077e7f', 
+                       activeforeground='#ffffff')                       
+    button_two.pack(side=tk.RIGHT, expand=True)
+
+    settingsWindow.mainloop()
+
+#endregion
+
+
 #Locking window and matching resolution to touch display (800x480)
 #region
-HEIGHT = 480
-WIDTH = 800
 root.minsize(WIDTH, HEIGHT)
 root.maxsize(WIDTH, HEIGHT)
 #endregion
 
-#Setting custom picture as background
+#Setting custom picture as background mainWindow
 #region
 background_image = tk.PhotoImage(file='template_bg3.png')
 background_label = tk.Label(root, image=background_image)
 background_label.place(relwidth=1, relheight=1)
 #endregion
 
-#Indicator squares - Manually placed
+#Indicator squares mainWindow
 #region
 left = tk.Canvas(root, width=10, height =10, bg ='green', bd=10)
 left.place(y=180,x=342)
@@ -265,40 +306,36 @@ light = tk.Canvas(root, width=10, height =10, bg ='#00ff30', bd=10)
 light.place(y=125,x=132)
 #endregion
 
-#Creating frame for buttons and creating buttons
+#Creating frame for buttons and creating buttons mainWindow
 #region
 frame = tk.Frame(root)
 frame.configure(bg='#424242')
 frame.place(relwidth=1, y=410, height=70)
 
-
-button_one = tk.Button(frame, text="Red",
+#left button root
+button_one = tk.Button(frame, text="EXIT",
                       font=("Segoe UI",20), bd='0', width=20, height=30, 
                        bg='#08b4b5', fg='#ffffff', 
                        activebackground='#077e7f', 
                        activeforeground='#ffffff',
-                       command=redAll)
+                       command=root.destroy)
 button_one.pack(side=tk.LEFT, expand=True)
 
-
-button_two = tk.Button(frame, text="Green",
+#right button root
+button_two = tk.Button(frame, text="Settings",
                       font=("Segoe UI",20), bd='0', width=20, height=30, 
                        bg='#08b4b5', fg='#ffffff', 
                        activebackground='#077e7f', 
                        activeforeground='#ffffff',
-                       command=greenAll)
+                       command=OpenSettingsWindow)
 button_two.pack(side=tk.RIGHT, expand=True)
 #endregion
 
-#Temperature and Light labels
+#Temperature and Light labels mainWindow
 #region
 temp_label = tk.Label(root, font=("Segoe UI", 20), text="70", bg='#777777',fg='red')
 temp_label.place(y=300, x=130)
-
-#light_label = tk.Label(root, font=("Segoe UI",20), text="GOOD",bg='#777777',fg='#00ff30')
-#light_label.place(y=120, x=110)
 #endregion
-
 #endregion    
 
 #Observers
