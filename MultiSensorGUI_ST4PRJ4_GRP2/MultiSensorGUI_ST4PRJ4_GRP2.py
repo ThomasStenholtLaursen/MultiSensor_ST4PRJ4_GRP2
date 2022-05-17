@@ -99,7 +99,7 @@ def OpenSettingsWindow():
     settingsWindow.title("SettingsWindow")
 
     #Custom demo settings background
-    settingsBackground_image = tk.PhotoImage(file='template_settingsbackground.png')
+    settingsBackground_image = tk.PhotoImage(file='template_settingsbackground1.png')
     settingsBackground_label = tk.Label(settingsWindow, image = settingsBackground_image)
     settingsBackground_label.place(relwidth=1, relheight=1)
 
@@ -108,25 +108,39 @@ def OpenSettingsWindow():
     sframe.configure(bg='#424242')
     sframe.place(relwidth=1, y=410, height=70)
 
-    #'Return' and 'save' buttons for settings window
+    #'Return' and 'Save' buttons for settings window
     returnButton = tk.Button(sframe, text="Return",
                       font=("Segoe UI",20), bd='0', width=20, height=30, 
-                       bg='#08b4b5', fg='#ffd200', 
+                       bg='#08b4b5', fg='#ffffff', 
                        activebackground='#077e7f', 
-                       activeforeground='#ffffff')                       
+                       activeforeground='#ffffff',
+                       command=settingsWindow.destroy)                       
     returnButton.pack(side=tk.LEFT, expand=True)
 
     saveButton = tk.Button(sframe, text="Save",
                       font=("Segoe UI",20), bd='0', width=20, height=30, 
-                       bg='#08b4b5', fg='#00ff12', 
+                       bg='#08b4b5', fg='#ffffff', 
                        activebackground='#077e7f', 
-                       activeforeground='#ffffff')                       
+                       activeforeground='#ffffff')                                              
     saveButton.pack(side=tk.RIGHT, expand=True)
 
-    testButton1 = tk.Button(settingsWindow, width=10, height=4)
-    testButton1.place(y=48, x=340)
-    testButton2 = tk.Button(settingsWindow, width=10, height=4)
-    testButton2.place(y=48, x=250)
+    uparrow = tk.PhotoImage(file='uparrow.png')
+    downarrow = tk.PhotoImage(file='downarrow.png')
+
+    pButton1 = tk.Button(settingsWindow, image = downarrow, bg = "#424242", height=60, bd='1')
+    pButton1.place(y=112, x=370)
+    pButton2 = tk.Button(settingsWindow, image = uparrow, bg = "#424242", height=60, bd='1')
+    pButton2.place(y=112, x=280)
+
+    tButton1 = tk.Button(settingsWindow, image = downarrow, bg = "#424242", height=60, bd='1')
+    tButton1.place(y=192, x=370)
+    tButton2 = tk.Button(settingsWindow, image = uparrow, bg = "#424242", height=60, bd='1')
+    tButton2.place(y=192, x=280)
+
+    lButton1 = tk.Button(settingsWindow, image = downarrow, bg = "#424242", height=60, bd='1')
+    lButton1.place(y=268, x=370)
+    lButton2 = tk.Button(settingsWindow, image = uparrow, bg = "#424242", height=60, bd='1')
+    lButton2.place(y=268, x=280)
 
     settingsWindow.mainloop()
 
@@ -170,7 +184,7 @@ frame.configure(bg='#424242')
 frame.place(relwidth=1, y=410, height=70)
 
 #left button root
-exitButton = tk.Button(frame, text="EXIT",
+exitButton = tk.Button(frame, text="Exit",
                       font=("Segoe UI",20), bd='0', width=20, height=30, 
                        bg='#08b4b5', fg='#ffffff', 
                        activebackground='#077e7f', 
