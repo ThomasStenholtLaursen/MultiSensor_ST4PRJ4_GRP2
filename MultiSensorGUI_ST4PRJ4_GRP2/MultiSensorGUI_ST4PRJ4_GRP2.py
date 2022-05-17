@@ -11,10 +11,13 @@ GREEN = '#00ff30'
 
 root = tk.Tk()
 
-
 SLEEPBUSINESS = 0.5
 
+#fullscreen for RPI
+#root.attributes('-fullscreen', True)
 
+#region Subject and Observer
+#region
 class Subject(ABC):
     @abstractmethod
     def attach(self, observer: Observer) -> None:
@@ -164,6 +167,7 @@ class Observer(ABC):
     @abstractmethod
     def update(self, subject: Subject) -> None:        
         pass
+#endregion
 
 #Test functions for observer pattern
 #region
