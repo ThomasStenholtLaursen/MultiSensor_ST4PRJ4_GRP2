@@ -21,6 +21,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DTO.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ForceHandling.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ForceInput.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MainWindow.py">
       <SubType>Code</SubType>
     </Compile>
