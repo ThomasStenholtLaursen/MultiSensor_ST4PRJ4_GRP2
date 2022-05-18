@@ -21,10 +21,10 @@ if __name__ == "__main__":
     producer.start()
     consumer.start()
 
-    #producer.join()
+    producer.join()
     print('Producer has finished')
 
-    #consumer.join()
+    consumer.join()
     print('Consumer has finished')
 
     print('Finished')

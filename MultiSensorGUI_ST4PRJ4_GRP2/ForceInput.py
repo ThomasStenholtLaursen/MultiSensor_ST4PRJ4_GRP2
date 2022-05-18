@@ -14,16 +14,16 @@ import time
 
 class ForceSensorRead:
     def readLeft():
-        v = random.randint(1,100)
+        v = 1
         return v
     def readRight():
-        v = random.randint(1,100)
+        v = 2
         return v
     def readTop():
-        v = random.randint(1,100)
+        v = 3
         return v
     def readBottom():
-        v = random.randint(1,100)
+        v = 4
         return v
     
 
@@ -31,13 +31,15 @@ class ForceSensorRead:
 class ForceProducer:
     def run(queue,finished,max):
         finished.put(False)
-        dto = ForceSensorDTO
-        for x in range(max):
-            dto.left = ForceSensorRead.readLeft
-            dto.right = ForceSensorRead.readRight            
-            dto.bottom = ForceSensorRead.readBottom            
-            dto.top = ForceSensorRead.readTop
-            queue.put(dto)          
+        while True:
+            leftread = ForceSensorRead.readLeft()
+            rightread = ForceSensorRead.readRight()            
+            topread = ForceSensorRead.readTop()
+            bottomread = ForceSensorRead.readBottom()            
+            reading = ForceSensorDTO(rightread, leftread, topread, bottomread)
+            queue.put(reading)   
+            print("produced: "+ str(reading))
+            time.sleep(1)
         finished.put(True)
         print('finished')
     

@@ -1,4 +1,5 @@
 from DTO import ForceSensorDTO
+import time
 
 class ForceConsumer:
     def run(work,finished):
@@ -7,10 +8,8 @@ class ForceConsumer:
             if not work.empty():
                 dto = work.get()
                 print('Consuming values')
-                print(dto.bottom)
+                print(dto.bottom,dto.top,dto.left)
                 
             else:
-                q = finished.get()
-                if q == True:
-                    break
-            print('finished')
+                time.sleep(0.1)
+        print('finished')
