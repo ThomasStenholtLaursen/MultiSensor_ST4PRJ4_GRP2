@@ -112,5 +112,5 @@ def convertLightValue(reading : int):
 class ObserverTest(Observer):
     def update(self, subject: Subject) -> None:
         if subject.leftreadingprop > 50:
-            print("Observer recevied value")
+            print("Observer received value")
 
