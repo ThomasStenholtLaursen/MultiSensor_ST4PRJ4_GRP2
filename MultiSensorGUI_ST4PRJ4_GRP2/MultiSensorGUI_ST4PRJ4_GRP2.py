@@ -1,6 +1,6 @@
 from MainWindow import MainWindow
-from ForceHandling import ForceConsumer as c
-from ForceInput import ForceProducer as p
+from DataHandling import ForceConsumer as c
+from DataInput import ForceProducer as p
 from queue import Queue
 import threading
 import multiprocessing
