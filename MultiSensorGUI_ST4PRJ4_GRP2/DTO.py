@@ -19,6 +19,4 @@ class SettingsDTO:
 @dataclass
 class LightTempDTO:
     light: int
-    temp: int
-
-    
+    temp: int    
