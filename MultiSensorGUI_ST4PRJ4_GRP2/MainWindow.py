@@ -59,32 +59,28 @@ class MainWindow(tk.Tk):
     def close_confirm(self):
         answer = messagebox.askokcancel(title='Closing Program', message='Are you sure that you want to quit?')
         if answer:
-            self.destroy()
+            self.destroy()   
 
+    def redRight(self):
+        self.right.configure(bg=RED)
 
-    
-
-
-    def redRight():
-        self.right.configure(bg='RED')
-
-    def greenRight():
+    def greenRight(self):
         self.right.configure(bg=GREEN)
 
-    def redLeft():
-        self.left.configure(bg='RED')
+    def redLeft(self):
+        self.left.configure(bg=RED)
 
-    def greenLeft():
+    def greenLeft(self):
         self.left.configure(bg=GREEN)
 
-    def redTop():
-        self.top.configure(bg='RED')
+    def redTop(self):
+        self.top.configure(bg=RED)
 
-    def greenTop():
+    def greenTop(self):
         self.top.configure(bg=GREEN)
 
-    def redBottom():
-        self.bottom.configure(bg='RED')
+    def redBottom(self):
+        self.bottom.configure(bg=RED)
 
-    def greenBottom():
+    def greenBottom(self):
         self.bottom.configure(bg=GREEN)
