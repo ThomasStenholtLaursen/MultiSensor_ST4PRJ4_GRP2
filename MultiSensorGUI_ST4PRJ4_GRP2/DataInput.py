@@ -42,10 +42,10 @@ class ForceProducer:
     def run(queue,finished,max):
         finished.put(False)
         while True:
-            leftread = ForceSensorRead.readLeft
-            rightread = ForceSensorRead.readRight       
-            topread = ForceSensorRead.readTop
-            bottomread = ForceSensorRead.readBottom      
+            leftread = ForceSensorRead.readLeft()
+            rightread = ForceSensorRead.readRight()       
+            topread = ForceSensorRead.readTop()
+            bottomread = ForceSensorRead.readBottom()      
             reading = ForceSensorDTO(rightread, leftread, topread, bottomread)
             queue.put(reading)   
             print("produced: "+ str(reading))
@@ -58,8 +58,8 @@ class LightTempProducer:
     def run(queue,finished,max):
         finished.put(False)
         while True:
-            lightread = LightTempSensorRead.readTemp
-            tempread = LightTempSensorRead.readLight
+            lightread = LightTempSensorRead.readTemp()
+            tempread = LightTempSensorRead.readLight()
             lightTempReading = LightTempDTO(lightread, tempread)
             queue.put(lightTempReading)   
             print("produced: "+ str(lightTempReading))
