@@ -1,5 +1,8 @@
 from DTO import ForceSensorDTO
 from DTO import LightTempDTO
+from AbstractSubjectObserver import Subject
+from AbstractSubjectObserver import Observer
+from typing import List
 import time
 
 
@@ -34,6 +37,20 @@ class ForceConsumer:
         self._bottomreadingprop = value
     
 
+    _observers: List[Observer] = []
+
+    def attach(self, observer: Observer) -> None:
+        self._observers.append(observer)
+
+    def detach(self, observer: Observer) -> None:
+        self._observers.remove(observer)
+
+    def notify(self) -> None:
+        for observer in self._observers:
+            observer.update(self)
+
+
+
     def run(self,work,finished):
         dto = ForceSensorDTO
         
@@ -46,13 +63,11 @@ class ForceConsumer:
                 ForceConsumer.rightreadingprop = convertForceValue(dto.right)
                 ForceConsumer.topreadingprop = convertForceValue(dto.top)
                 ForceConsumer.bottomreadingprop = convertForceValue(dto.bottom)
+                self.notify()
                 print(ForceConsumer.leftreadingprop, ForceConsumer.rightreadingprop, ForceConsumer.topreadingprop, ForceConsumer.bottomreadingprop)
                 
             else:
                 time.sleep(0.1)
-
-    
-
 
 class LightTempConsumer:
     @property
@@ -82,14 +97,9 @@ class LightTempConsumer:
             else:
                 time.sleep(0.1)
 
-
-
-
-
 def convertForceValue(reading : int):
     convertedValue = reading*3
     return convertedValue
-
 
 def convertTempValue(reading : int):
     convertedValue = reading*6
@@ -98,4 +108,9 @@ def convertTempValue(reading : int):
 def convertLightValue(reading : int):
     convertedValue = reading*9
     return convertedValue
+
+class ObserverTest(Observer):
+    def update(self, subject: Subject) -> None:
+        if subject.leftreadingprop > 50:
+            print("det her pis viker sådan da")
 
