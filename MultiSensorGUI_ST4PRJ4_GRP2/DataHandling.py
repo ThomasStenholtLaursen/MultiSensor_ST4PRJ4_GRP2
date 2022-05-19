@@ -70,7 +70,7 @@ class LightTempConsumer:
         self._tempreadingprop = value
 
 
-    def run(work,finished):
+    def run(self,work,finished):
         litedto = LightTempDTO
         while True:
             if not work.empty():

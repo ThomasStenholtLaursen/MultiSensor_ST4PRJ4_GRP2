@@ -55,7 +55,7 @@ class ForceProducer:
 
 
 class LightTempProducer:
-    def run(queue,finished,max):
+    def run(self,queue,finished,max):
         finished.put(False)
         while True:
             lightread = LightTempSensorRead.readTemp()

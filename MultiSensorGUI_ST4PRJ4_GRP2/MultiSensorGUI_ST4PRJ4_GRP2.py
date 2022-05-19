@@ -1,12 +1,14 @@
 from MainWindow import MainWindow
-from DataHandling import ForceConsumer as Consumer
-from DataInput import ForceProducer as Producer
+from DataHandling import ForceConsumer as FConsumer
+from DataInput import ForceProducer as FProducer
+from DataInput import LightTempProducer as LTProducer
+from DataHandling import LightTempConsumer as LTConsumer
 from queue import Queue
 import threading
 import multiprocessing
 from threading import Thread
 
-#fullscreen for RPI - next line needs to be included when running with display on RPI
+
 
 
 
@@ -14,22 +16,36 @@ if __name__ == "__main__":
     max = 10
     work = Queue()
     finished = Queue()
+    ltmax = 10
+    ltwork = Queue()
+    ltfinished = Queue()
 
-    p = Producer()
-    c = Consumer()
+    forceprod = FProducer()
+    forcecon = FConsumer()
+    lighttempprod = LTProducer()
+    lighttempcon = LTConsumer()
     
 
-    producer = Thread(target=p.run,args=[work,finished,max])
-    consumer = Thread(target=c.run,args=[work,finished])
-    producer.daemon = True
-    consumer.daemon = True
+    ForceProducerThread = Thread(target=forceprod.run,args=[work,finished,max])
+    ForceConsumerThread = Thread(target=forcecon.run,args=[work,finished])
+    lightTempProducerThread = Thread(target=lighttempprod.run,args=[ltwork,ltfinished,ltmax])
+    lightTempConsumerThread = Thread(target=lighttempcon.run,args=[ltwork,ltfinished])
+
+    ForceProducerThread.daemon = True
+    ForceConsumerThread.daemon = True
+    lightTempProducerThread.daemon = True
+    lightTempConsumerThread.daemon = True
 
     def runSensorThreads():
-        producer.start()
-        consumer.start()
+        ForceProducerThread.start()
+        ForceConsumerThread.start()
+        lightTempProducerThread.start()
+        lightTempConsumerThread.start()
+
     
 
     app = MainWindow()
+    #fullscreen for RPI - next line needs to be included when running with display on RPI. Also in settingswindow.
     #app.attributes('-fullscreen', True)
 
     app.after(0, runSensorThreads)
