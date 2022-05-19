@@ -15,16 +15,16 @@ import time
 
 class ForceSensorRead:
     def readLeft():
-        v = 1
+        v = 100
         return v
     def readRight():
-        v = 2
+        v = 200
         return v
     def readTop():
-        v = 3
+        v = 300
         return v
     def readBottom():
-        v = 4
+        v = 400
         return v
 
 class LightTempSensorRead:

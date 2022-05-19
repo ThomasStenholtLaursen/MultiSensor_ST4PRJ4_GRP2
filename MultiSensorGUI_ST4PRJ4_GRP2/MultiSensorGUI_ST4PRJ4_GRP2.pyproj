@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AbstractSubjectObserver.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DTO.py">
       <SubType>Code</SubType>
     </Compile>
