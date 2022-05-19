@@ -1,6 +1,7 @@
 from MainWindow import MainWindow
 from DataHandling import ForceConsumer as Consumer
 from DataInput import ForceProducer as Producer
+from DataHandling import ObserverTest
 from queue import Queue
 import threading
 import multiprocessing
@@ -18,6 +19,8 @@ if __name__ == "__main__":
     p = Producer()
     c = Consumer()
     
+    observer = ObserverTest()
+    c.attach(observer)
 
     producer = Thread(target=p.run,args=[work,finished,max])
     consumer = Thread(target=c.run,args=[work,finished])
