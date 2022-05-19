@@ -2,6 +2,10 @@ import tkinter as tk
 from tkinter import messagebox
 from SettingsWindow import SettingsWindow
 
+GREEN = '#00ff30'
+RED = '#ff2323'
+
+
 class MainWindow(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -56,3 +60,31 @@ class MainWindow(tk.Tk):
         answer = messagebox.askokcancel(title='Closing Program', message='Are you sure that you want to quit?')
         if answer:
             self.destroy()
+
+
+    
+
+
+    def redRight():
+        self.right.configure(bg='RED')
+
+    def greenRight():
+        self.right.configure(bg=GREEN)
+
+    def redLeft():
+        self.left.configure(bg='RED')
+
+    def greenLeft():
+        self.left.configure(bg=GREEN)
+
+    def redTop():
+        self.top.configure(bg='RED')
+
+    def greenTop():
+        self.top.configure(bg=GREEN)
+
+    def redBottom():
+        self.bottom.configure(bg='RED')
+
+    def greenBottom():
+        self.bottom.configure(bg=GREEN)

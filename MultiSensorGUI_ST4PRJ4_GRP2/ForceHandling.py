@@ -1,6 +1,7 @@
 from DTO import ForceSensorDTO
 import time
 
+
 class ForceConsumer:
     def run(work,finished):
         dto = ForceSensorDTO
@@ -13,3 +14,7 @@ class ForceConsumer:
             else:
                 time.sleep(0.1)
         print('finished')
+
+
+
+
