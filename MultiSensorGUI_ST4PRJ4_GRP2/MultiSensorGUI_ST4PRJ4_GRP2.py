@@ -10,12 +10,8 @@ from threading import Thread
 #root.attributes('-fullscreen', True)
 
 
-
-
-
-
 if __name__ == "__main__":
-    max = 1000
+    max = 10
     work = Queue()
     finished = Queue()
 
