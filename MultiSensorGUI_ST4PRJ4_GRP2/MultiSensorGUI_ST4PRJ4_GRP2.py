@@ -1,13 +1,13 @@
 from MainWindow import MainWindow
-from DataHandling import ForceConsumer as c
-from DataInput import ForceProducer as p
+from DataHandling import ForceConsumer as Consumer
+from DataInput import ForceProducer as Producer
 from queue import Queue
 import threading
 import multiprocessing
 from threading import Thread
 
 #fullscreen for RPI - next line needs to be included when running with display on RPI
-#root.attributes('-fullscreen', True)
+
 
 
 if __name__ == "__main__":
@@ -15,6 +15,8 @@ if __name__ == "__main__":
     work = Queue()
     finished = Queue()
 
+    p = Producer()
+    c = Consumer()
     
 
     producer = Thread(target=p.run,args=[work,finished,max])
@@ -28,6 +30,7 @@ if __name__ == "__main__":
     
 
     app = MainWindow()
+    #app.attributes('-fullscreen', True)
 
     app.after(0, runSensorThreads)
     

@@ -34,7 +34,7 @@ class ForceConsumer:
         self._bottomreadingprop = value
     
 
-    def run(work,finished):
+    def run(self,work,finished):
         dto = ForceSensorDTO
         
         while True:
