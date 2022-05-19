@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from DTO import SettingsDTO
 
 right_p_setting = 40
 left_p_setting = 100
@@ -12,6 +13,7 @@ class SettingsWindow(tk.Toplevel):
     def __init__(self, parent):
         super().__init__(parent)
 
+        
         self.geometry('800x480')
         self.resizable(0, 0)
         #self.attributes('-fullscreen', True)
@@ -37,7 +39,8 @@ class SettingsWindow(tk.Toplevel):
                       font=("Segoe UI",20), bd='0', width=20, height=30, 
                        bg='#08b4b5', fg='#ffffff', 
                        activebackground='#077e7f', 
-                       activeforeground='#ffffff')                                              
+                       activeforeground='#ffffff',
+                       command=self.saveSettingsInDTO)                                              
         self.saveButton.pack(side=tk.RIGHT, expand=True)
 
         self.light_label = tk.Label(self, text = light_setting, font=("Segoe UI",18), bg='#ffffff', justify="center")
@@ -180,3 +183,8 @@ class SettingsWindow(tk.Toplevel):
         if bottom_p_setting <= 40:
             bottom_p_setting = 40
         self.bottom_p_label.config(text=bottom_p_setting)
+
+    def saveSettingsInDTO(self):
+        setting = SettingsDTO(right_p_setting,left_p_setting,top_p_setting,bottom_p_setting,light_setting,temp_setting)
+        print("saved in settingsdto: " + str(setting))
+
