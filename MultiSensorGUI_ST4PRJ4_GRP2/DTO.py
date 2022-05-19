@@ -20,5 +20,3 @@ class SettingsDTO:
 class LightTempDTO:
     light: int
     temp: int
-
-    
