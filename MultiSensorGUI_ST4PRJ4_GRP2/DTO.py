@@ -6,4 +6,9 @@ class ForceSensorDTO:
     left: int
     top: int
     bottom: int
+
+@dataclass 
+class LightTempDTO:
+    light: int
+    temp: int
     

@@ -24,10 +24,10 @@
     <Compile Include="DTO.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ForceHandling.py">
+    <Compile Include="DataHandling.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ForceInput.py">
+    <Compile Include="DataInput.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MainWindow.py">
