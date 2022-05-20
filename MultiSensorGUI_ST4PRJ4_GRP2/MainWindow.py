@@ -14,7 +14,7 @@ class MainWindow(tk.Tk):
         self.resizable(0, 0)
         self.title("Main window")
 
-        self.background_image = tk.PhotoImage(file='template_bg3.png')
+        self.background_image = tk.PhotoImage(file='template_bg4.png')
         self.background_label = tk.Label(self, image=self.background_image)
         self.background_label.place(relwidth=1, relheight=1)
 
@@ -49,7 +49,7 @@ class MainWindow(tk.Tk):
                        command=self.open_window)
         self.settingsButton.pack(side=tk.RIGHT, expand=True)
 
-        self.temp_label = tk.Label(self, font=("Segoe UI", 20), text="70", bg='#777777',fg='red')
+        self.temp_label = tk.Label(self, font=("Segoe UI", 20), text="70", bg='#424242',fg='red')
         self.temp_label.place(y=300, x=130)
 
     def open_window(self):
