@@ -25,10 +25,7 @@ if __name__ == "__main__":
     lighttempprod = LTProducer()
     lighttempcon = LTConsumer()
 
-
-    #forcecon.attach(pressureObserver)
     forcecon.attach(app)
-    #lighttempcon.attach(templightObserver)
     lighttempcon.attach(app)
 
     ForceProducerThread = Thread(target=forceprod.run,args=[work,finished,max])
@@ -47,12 +44,15 @@ if __name__ == "__main__":
         lightTempProducerThread.start()
         lightTempConsumerThread.start()
 
-    #for fullscreen on RPI include the next line of code:
+    ###For fullscreen on RPI include the next line of code###
     #app.attributes('-fullscreen', True)
 
     app.after(0, runSensorThreads)
     
     app.mainloop()
+
+    lighttempcon.detach(app)
+    forcecon.detach(app)
 
     
     
