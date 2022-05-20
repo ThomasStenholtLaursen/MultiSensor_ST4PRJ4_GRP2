@@ -7,12 +7,14 @@ from queue import Queue
 import threading
 import multiprocessing
 from threading import Thread
-
-
+from Observers import PressureObserver, TempLightObserver
 
 
 
 if __name__ == "__main__":
+    
+    app = MainWindow()
+    
     max = 10
     work = Queue()
     finished = Queue()
@@ -24,6 +26,12 @@ if __name__ == "__main__":
     forcecon = FConsumer()
     lighttempprod = LTProducer()
     lighttempcon = LTConsumer()
+
+    pressureObserver = PressureObserver()
+    templightObserver = TempLightObserver()
+
+    forcecon.attach(pressureObserver)
+    lighttempcon.attach(templightObserver)
     
 
     ForceProducerThread = Thread(target=forceprod.run,args=[work,finished,max])
@@ -42,10 +50,8 @@ if __name__ == "__main__":
         lightTempProducerThread.start()
         lightTempConsumerThread.start()
 
-    
 
-    app = MainWindow()
-    #fullscreen for RPI - next line needs to be included when running with display on RPI. Also in settingswindow.
+    #for fullscreen on RPI include the next line of code:
     #app.attributes('-fullscreen', True)
 
     app.after(0, runSensorThreads)

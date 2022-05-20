@@ -83,6 +83,18 @@ class LightTempConsumer:
     def tempreadingprop(self,value):
         self._tempreadingprop = value
 
+    _observers: List[Observer] = []
+
+    def attach(self, observer: Observer) -> None:
+        self._observers.append(observer)
+
+    def detach(self, observer: Observer) -> None:
+        self._observers.remove(observer)
+
+    def notify(self) -> None:
+        for observer in self._observers:
+            observer.update(self)
+
 
     def run(self,work,finished):
         litedto = LightTempDTO
@@ -93,6 +105,7 @@ class LightTempConsumer:
                 print(litedto.light, litedto.temp)
                 LightTempConsumer.lightreadingprop = convertLightValue(litedto.light)
                 LightTempConsumer.tempreadingprop = convertTempValue(litedto.temp)
+                self.notify()
             else:
                 time.sleep(0.1)
 
@@ -107,9 +120,4 @@ def convertTempValue(reading : int):
 def convertLightValue(reading : int):
     convertedValue = reading*9
     return convertedValue
-
-class ObserverTest(Observer):
-    def update(self, subject: Subject) -> None:
-        if subject.leftreadingprop > 50:
-            print("Observer received value")
 
