@@ -16,7 +16,10 @@ class SettingsWindow(tk.Toplevel):
         
         self.geometry('800x480')
         self.resizable(0, 0)
+
+        #for fullscreen on RPI include the next line of code:
         #self.attributes('-fullscreen', True)
+
         self.title("Settings window")
 
         self.settings_background_image = tk.PhotoImage(file='template_settingsbackground2.png')
