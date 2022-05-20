@@ -1,14 +1,13 @@
 from MainWindow import MainWindow
 from DataHandling import ForceConsumer as Consumer
 from DataInput import ForceProducer as Producer
-from DataHandling import ObserverTest
+from Observers import LeftPressure, RightPressure, TopPressure, BottomPressure
 from queue import Queue
 import threading
 import multiprocessing
 from threading import Thread
 
 #fullscreen for RPI - next line needs to be included when running with display on RPI
-
 
 
 if __name__ == "__main__":
@@ -19,8 +18,15 @@ if __name__ == "__main__":
     p = Producer()
     c = Consumer()
     
-    observer = ObserverTest()
-    c.attach(observer)
+    left = LeftPressure()
+    right = RightPressure()
+    top = TopPressure()
+    bottom = BottomPressure()
+
+    c.attach(left)
+    c.attach(right)
+    c.attach(top)
+    c.attach(bottom)
 
     producer = Thread(target=p.run,args=[work,finished,max])
     consumer = Thread(target=c.run,args=[work,finished])
