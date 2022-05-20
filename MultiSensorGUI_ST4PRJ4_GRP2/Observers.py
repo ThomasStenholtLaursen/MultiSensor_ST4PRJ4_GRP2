@@ -1,8 +1,6 @@
 from DataHandling import ForceConsumer
 from AbstractSubjectObserver import Observer, Subject
 
-
-
 class PressureObserver(Observer):
     def update(self, subject: Subject) -> None:
         if subject.leftreadingprop > 50:

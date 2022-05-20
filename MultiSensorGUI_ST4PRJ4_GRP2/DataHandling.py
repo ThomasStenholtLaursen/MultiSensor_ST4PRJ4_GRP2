@@ -1,5 +1,4 @@
-from DTO import ForceSensorDTO
-from DTO import LightTempDTO
+from DTO import ForceSensorDTO, LightTempDTO
 from AbstractSubjectObserver import Subject, Observer
 from typing import List
 import time

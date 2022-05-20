@@ -1,14 +1,13 @@
 from MainWindow import MainWindow
 from DataHandling import ForceConsumer as FConsumer
+from DataHandling import LightTempConsumer as LTConsumer
 from DataInput import ForceProducer as FProducer
 from DataInput import LightTempProducer as LTProducer
-from DataHandling import LightTempConsumer as LTConsumer
+from Observers import PressureObserver, TempLightObserver
+from threading import Thread
 from queue import Queue
 import threading
 import multiprocessing
-from threading import Thread
-from Observers import PressureObserver, TempLightObserver
-
 
 
 if __name__ == "__main__":
@@ -32,7 +31,6 @@ if __name__ == "__main__":
 
     forcecon.attach(pressureObserver)
     lighttempcon.attach(templightObserver)
-    
 
     ForceProducerThread = Thread(target=forceprod.run,args=[work,finished,max])
     ForceConsumerThread = Thread(target=forcecon.run,args=[work,finished])
@@ -50,12 +48,10 @@ if __name__ == "__main__":
         lightTempProducerThread.start()
         lightTempConsumerThread.start()
 
-
     #for fullscreen on RPI include the next line of code:
     #app.attributes('-fullscreen', True)
 
     app.after(0, runSensorThreads)
-    
     
     app.mainloop()
 

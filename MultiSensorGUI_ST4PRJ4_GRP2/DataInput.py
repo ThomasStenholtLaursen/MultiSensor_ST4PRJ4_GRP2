@@ -1,17 +1,7 @@
-#producer and sensor class
-
-#Imports
-from DTO import ForceSensorDTO
-from DTO import LightTempDTO
-import random
-import threading
-import multiprocessing
-import logging
-from threading import Thread
+from DTO import ForceSensorDTO, LightTempDTO
 from queue import Queue
+import random
 import time
-
-
 
 class ForceSensorRead:
     def readLeft():
@@ -35,8 +25,6 @@ class LightTempSensorRead:
         v = 22
         return v
     
-    
-
 
 class ForceProducer:
     def run(self,queue,finished,max):
