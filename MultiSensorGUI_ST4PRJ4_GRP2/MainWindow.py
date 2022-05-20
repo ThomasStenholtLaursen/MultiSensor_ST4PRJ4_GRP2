@@ -1,13 +1,11 @@
 import tkinter as tk
 from tkinter import messagebox
 from SettingsWindow import SettingsWindow
-from DTO import SettingsDTO
 from AbstractSubjectObserver import Observer, Subject
+import config as settings
 
 GREEN = '#00ff30'
 RED = '#ff2323'
-
-
 
 
 class MainWindow(tk.Tk, Observer):
@@ -66,35 +64,35 @@ class MainWindow(tk.Tk, Observer):
             self.destroy()
 
     def update_force(self, subject: Subject) -> None:
-        if subject.leftreadingprop > 50:
+        if subject.leftreadingprop > settings.leftSetting:
             self.left.configure(bg=RED)
         else:
             self.left.configure(bg=GREEN)
 
-        if subject.rightreadingprop > 50:
+        if subject.rightreadingprop > settings.rightSetting:
             self.right.configure(bg=RED)
         else:
             self.right.configure(bg=GREEN)
 
-        if subject.topreadingprop > 50:
+        if subject.topreadingprop > settings.topSetting:
             self.top.configure(bg=RED)
         else:
             self.top.configure(bg=GREEN)
 
-        if subject.bottomreadingprop > 50:
+        if subject.bottomreadingprop > settings.bottomSetting:
             self.bottom.configure(bg=RED)
         else:
             self.bottom.configure(bg=GREEN)
 
     def update_lt(self, subject: Subject) -> None:
 
-        if subject.lightreadingprop > 5:
+        if subject.lightreadingprop > settings.lightSetting:
             self.light.configure(bg=RED)
         else:
             self.light.configure(bg=GREEN)
 
         self.temp_label.configure(text=subject.tempreadingprop)
-        if subject.tempreadingprop > 40:
+        if subject.tempreadingprop > settings.tempSetting:
             self.temp_label.configure(fg=RED)
         else:
             self.temp_label.configure(fg=GREEN)

@@ -7,16 +7,16 @@ PRODUCERSLEEP = 0.5
 
 class ForceSensorRead:
     def readLeft():
-        v = random.randint(1, 100)
+        v = random.randint(41, 100)
         return v
     def readRight():
-        v = random.randint(1, 100)
+        v = random.randint(41, 100)
         return v
     def readTop():
-        v = random.randint(1, 100)
+        v = random.randint(41, 100)
         return v
     def readBottom():
-        v = random.randint(1, 100)
+        v = random.randint(41, 100)
         return v
 
 class LightTempSensorRead:

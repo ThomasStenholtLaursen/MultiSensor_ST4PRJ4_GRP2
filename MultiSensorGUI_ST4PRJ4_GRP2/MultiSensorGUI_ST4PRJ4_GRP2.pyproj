@@ -24,6 +24,9 @@
     <Compile Include="AbstractSubjectObserver.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="config.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DTO.py">
       <SubType>Code</SubType>
     </Compile>
