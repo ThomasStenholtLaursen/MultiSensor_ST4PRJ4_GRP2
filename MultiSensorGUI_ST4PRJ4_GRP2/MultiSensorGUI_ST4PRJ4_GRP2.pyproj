@@ -37,9 +37,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MultiSensorGUI_ST4PRJ4_GRP2.py" />
-    <Compile Include="Observers.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="SettingsWindow.py">
       <SubType>Code</SubType>
     </Compile>

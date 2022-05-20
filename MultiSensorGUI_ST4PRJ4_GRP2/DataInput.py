@@ -3,26 +3,28 @@ from queue import Queue
 import random
 import time
 
+PRODUCERSLEEP = 0.5
+
 class ForceSensorRead:
     def readLeft():
-        v = 100
+        v = random.randint(1, 100)
         return v
     def readRight():
-        v = 200
+        v = random.randint(1, 100)
         return v
     def readTop():
-        v = 300
+        v = random.randint(1, 100)
         return v
     def readBottom():
-        v = 400
+        v = random.randint(1, 100)
         return v
 
 class LightTempSensorRead:
     def readLight():
-        v = 10
+        v = random.randint(1, 10)
         return v
     def readTemp():
-        v = 22
+        v = random.randint(10, 90)
         return v
     
 
@@ -37,7 +39,7 @@ class ForceProducer:
             reading = ForceSensorDTO(rightread, leftread, topread, bottomread)
             queue.put(reading)   
             print("produced: "+ str(reading))
-            time.sleep(1)
+            time.sleep(PRODUCERSLEEP)
         finished.put(True)
         print('finished')
 
@@ -46,12 +48,12 @@ class LightTempProducer:
     def run(self,queue,finished,max):
         finished.put(False)
         while True:
-            lightread = LightTempSensorRead.readTemp()
-            tempread = LightTempSensorRead.readLight()
+            lightread = LightTempSensorRead.readLight()
+            tempread = LightTempSensorRead.readTemp()
             lightTempReading = LightTempDTO(lightread, tempread)
             queue.put(lightTempReading)   
             print("produced: "+ str(lightTempReading))
-            time.sleep(1)
+            time.sleep(PRODUCERSLEEP)
         finished.put(True)
         print('finished')
     

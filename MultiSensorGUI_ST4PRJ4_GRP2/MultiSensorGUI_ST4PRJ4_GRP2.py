@@ -3,7 +3,6 @@ from DataHandling import ForceConsumer as FConsumer
 from DataHandling import LightTempConsumer as LTConsumer
 from DataInput import ForceProducer as FProducer
 from DataInput import LightTempProducer as LTProducer
-from Observers import PressureObserver, TempLightObserver
 from threading import Thread
 from queue import Queue
 import threading
@@ -26,11 +25,11 @@ if __name__ == "__main__":
     lighttempprod = LTProducer()
     lighttempcon = LTConsumer()
 
-    pressureObserver = PressureObserver()
-    templightObserver = TempLightObserver()
 
-    forcecon.attach(pressureObserver)
-    lighttempcon.attach(templightObserver)
+    #forcecon.attach(pressureObserver)
+    forcecon.attach(app)
+    #lighttempcon.attach(templightObserver)
+    lighttempcon.attach(app)
 
     ForceProducerThread = Thread(target=forceprod.run,args=[work,finished,max])
     ForceConsumerThread = Thread(target=forcecon.run,args=[work,finished])
