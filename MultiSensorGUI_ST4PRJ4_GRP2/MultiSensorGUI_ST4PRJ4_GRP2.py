@@ -8,9 +8,8 @@ from queue import Queue
 import threading
 import multiprocessing
 
+def main():
 
-if __name__ == "__main__":
-    
     app = MainWindow()
     
     max = 10
@@ -54,5 +53,8 @@ if __name__ == "__main__":
     lighttempcon.detach(app)
     forcecon.detach(app)
 
+
+if __name__ == "__main__":
     
+    main()
     
