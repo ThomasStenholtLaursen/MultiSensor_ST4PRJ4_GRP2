@@ -111,22 +111,21 @@ class SettingsWindow(tk.Toplevel):
             or settings.BOTTOMSETTING != self.bottom_setting
             or settings.LIGHTSETTING != self.light_setting
             or settings.TEMPSETTING != self.temp_setting):
-            answer = messagebox.askyesno(parent=self, title='Warning!', message='You did not save settings! Do you still want to return?')
+            answer = messagebox.askokcancel(parent=self, title='Warning!', message='Settings not saved.\nDo you want to continue?')
             if answer:
                 self.destroy()
         else:
             self.destroy()
 
     def save_settings(self):
-        answar = messagebox.askyesno(parent=self, title='Confirm to save altered settings', message='Do you want to save settings?')
-        if answar:
-            settings.RIGHTSETTING = self.right_setting
-            settings.LEFTSETTING = self.left_setting
-            settings.TOPSETTING = self.top_setting
-            settings.BOTTOMSETTING = self.bottom_setting
-            settings.LIGHTSETTING = self.light_setting
-            settings.TEMPSETTING = self.temp_setting
-            self.destroy()
+         messagebox.showinfo(parent=self, message='Settings saved')        
+         settings.RIGHTSETTING = self.right_setting
+         settings.LEFTSETTING = self.left_setting
+         settings.TOPSETTING = self.top_setting
+         settings.BOTTOMSETTING = self.bottom_setting
+         settings.LIGHTSETTING = self.light_setting
+         settings.TEMPSETTING = self.temp_setting
+         self.destroy()
 
     def inc_light(self):
         self.light_setting += settings.INC_L
