@@ -28,8 +28,12 @@ class MainWindow(tk.Tk, Observer):
         self.top.place(y=13,x=513)
         self.bottom = tk.Canvas(self, width=10, height =10, bg = GREEN, bd=10)
         self.bottom.place(y=346,x=513)
+        
         self.light = tk.Canvas(self, width=10, height =10, bg ='#00ff30', bd=10)
         self.light.place(y=125,x=132)
+
+        self.temp_label = tk.Label(self, font=("Segoe UI", 20), bg='#424242',fg=RED)
+        self.temp_label.place(y=300, x=130)
 
         self.frame = tk.Frame(self)
         self.frame.configure(bg='#424242')
@@ -49,10 +53,7 @@ class MainWindow(tk.Tk, Observer):
                        activebackground='#077e7f', 
                        activeforeground='#ffffff',
                        command=self.open_window)
-        self.settingsButton.pack(side=tk.RIGHT, expand=True)
-
-        self.temp_label = tk.Label(self, font=("Segoe UI", 20), text="70", bg='#424242',fg=RED)
-        self.temp_label.place(y=300, x=130)
+        self.settingsButton.pack(side=tk.RIGHT, expand=True)        
 
     def open_window(self):
         settings = SettingsWindow(self)
@@ -64,35 +65,35 @@ class MainWindow(tk.Tk, Observer):
             self.destroy()
 
     def update_force(self, subject: Subject) -> None:
-        if subject.leftreadingprop > settings.leftSetting:
+        if subject.leftreadingprop > settings.LEFTSETTING:
             self.left.configure(bg=RED)
         else:
             self.left.configure(bg=GREEN)
 
-        if subject.rightreadingprop > settings.rightSetting:
+        if subject.rightreadingprop > settings.RIGHTSETTING:
             self.right.configure(bg=RED)
         else:
             self.right.configure(bg=GREEN)
 
-        if subject.topreadingprop > settings.topSetting:
+        if subject.topreadingprop > settings.TOPSETTING:
             self.top.configure(bg=RED)
         else:
             self.top.configure(bg=GREEN)
 
-        if subject.bottomreadingprop > settings.bottomSetting:
+        if subject.bottomreadingprop > settings.BOTTOMSETTING:
             self.bottom.configure(bg=RED)
         else:
             self.bottom.configure(bg=GREEN)
 
     def update_lt(self, subject: Subject) -> None:
 
-        if subject.lightreadingprop > settings.lightSetting:
+        if subject.lightreadingprop > settings.LIGHTSETTING:
             self.light.configure(bg=RED)
         else:
             self.light.configure(bg=GREEN)
-
-        self.temp_label.configure(text=subject.tempreadingprop)
-        if subject.tempreadingprop > settings.tempSetting:
+       
+        self.temp_label.configure(text=str(subject.tempreadingprop) + ' \N{DEGREE SIGN}C')
+        if subject.tempreadingprop > settings.TEMPSETTING:
             self.temp_label.configure(fg=RED)
         else:
             self.temp_label.configure(fg=GREEN)
