@@ -12,10 +12,8 @@ def main():
 
     app = MainWindow()
     
-    max = 10
     work = Queue()
     finished = Queue()
-    ltmax = 10
     ltwork = Queue()
     ltfinished = Queue()
 
@@ -27,9 +25,9 @@ def main():
     forcecon.attach(app)
     lighttempcon.attach(app)
 
-    ForceProducerThread = Thread(target=forceprod.run,args=[work,finished,max])
+    ForceProducerThread = Thread(target=forceprod.run,args=[work,finished])
     ForceConsumerThread = Thread(target=forcecon.run,args=[work,finished])
-    lightTempProducerThread = Thread(target=lighttempprod.run,args=[ltwork,ltfinished,ltmax])
+    lightTempProducerThread = Thread(target=lighttempprod.run,args=[ltwork,ltfinished])
     lightTempConsumerThread = Thread(target=lighttempcon.run,args=[ltwork,ltfinished])
 
     ForceProducerThread.daemon = True

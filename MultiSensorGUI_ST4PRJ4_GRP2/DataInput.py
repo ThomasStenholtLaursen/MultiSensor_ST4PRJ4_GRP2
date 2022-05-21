@@ -7,16 +7,16 @@ PRODUCERSLEEP = 0.5
 
 class ForceSensorRead:
     def readLeft():
-        v = random.randint(41, 100)
+        v = random.randint(40, 100)
         return v
     def readRight():
-        v = random.randint(41, 100)
+        v = random.randint(40, 100)
         return v
     def readTop():
-        v = random.randint(41, 100)
+        v = random.randint(40, 100)
         return v
     def readBottom():
-        v = random.randint(41, 100)
+        v = random.randint(40, 100)
         return v
 
 class LightTempSensorRead:
@@ -29,7 +29,7 @@ class LightTempSensorRead:
     
 
 class ForceProducer:
-    def run(self,queue,finished,max):
+    def run(self,queue,finished):
         finished.put(False)
         while True:
             leftread = ForceSensorRead.readLeft()
@@ -45,7 +45,7 @@ class ForceProducer:
 
 
 class LightTempProducer:
-    def run(self,queue,finished,max):
+    def run(self,queue,finished):
         finished.put(False)
         while True:
             lightread = LightTempSensorRead.readLight()
