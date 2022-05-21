@@ -1,11 +1,11 @@
 
 #Sensor sensitivity default
-leftSetting = 40
-rightSetting = 40
-topSetting = 40
-bottomSetting = 40
-lightSetting = 5
-tempSetting = 30
+LEFTSETTING = 100
+RIGHTSETTING = 100
+TOPSETTING = 100
+BOTTOMSETTING = 100
+LIGHTSETTING = 5
+TEMPSETTING = 30
 
 #Increments/decrements in settings for pressure sensor sensitivity
 INC_P = 10

@@ -10,17 +10,17 @@ class SettingsWindow(tk.Toplevel):
         self.geometry('800x480')
         self.resizable(0, 0)
 
-        #for fullscreen on RPI include the next line of code:
+        ###For fullscreen on RPI include the next line of code:
         #self.attributes('-fullscreen', True)
 
         self.title("Settings window")
 
-        self.right_setting = settings.rightSetting
-        self.left_setting = settings.leftSetting
-        self.top_setting = settings.topSetting
-        self.bottom_setting = settings.bottomSetting
-        self.light_setting = settings.lightSetting
-        self.temp_setting = settings.tempSetting
+        self.right_setting = settings.RIGHTSETTING
+        self.left_setting = settings.LEFTSETTING
+        self.top_setting = settings.TOPSETTING
+        self.bottom_setting = settings.BOTTOMSETTING
+        self.light_setting = settings.LIGHTSETTING
+        self.temp_setting = settings.TEMPSETTING
 
         self.settings_background_image = tk.PhotoImage(file='template_settingsbackground3.png')
         self.settings_background_label = tk.Label(self, image=self.settings_background_image)
@@ -72,18 +72,18 @@ class SettingsWindow(tk.Toplevel):
         self.uparrow = tk.PhotoImage(file='uparrow.png')
         self.downarrow = tk.PhotoImage(file='downarrow.png')
 
-        self.light_button1 = tk.Button(self, image = self.downarrow, bg = "#424242", height=60, width=45, bd='1', command=self.dec_light)
-        self.light_button1.place(y=113, x=695)
+        self.light_button_down = tk.Button(self, image = self.downarrow, bg = "#424242", height=60, width=45, bd='1', command=self.dec_light)
+        self.light_button_down.place(y=113, x=695)
         self.light_button2 = tk.Button(self, image = self.uparrow, bg = "#424242", height=60, width=45, bd='1', command=self.inc_light)
         self.light_button2.place(y=113, x=630)
 
-        self.temp_button1 = tk.Button(self, image = self.downarrow, bg = "#424242", height=60, width=45, bd='1', command=self.dec_temp)
-        self.temp_button1.place(y=276, x=695)
+        self.temp_button_down = tk.Button(self, image = self.downarrow, bg = "#424242", height=60, width=45, bd='1', command=self.dec_temp)
+        self.temp_button_down.place(y=276, x=695)
         self.temp_button2 = tk.Button(self, image = self.uparrow, bg = "#424242", height=60, width=45, bd='1', command=self.inc_temp)
         self.temp_button2.place(y=276, x=630)
 
-        self.left_p_button1 = tk.Button(self, image = self.downarrow, bg = "#424242", height=60, width=45, bd='1', command=self.dec_p_left)
-        self.left_p_button1.place(y=69, x=320)
+        self.left_p_button_down = tk.Button(self, image = self.downarrow, bg = "#424242", height=60, width=45, bd='1', command=self.dec_p_left)
+        self.left_p_button_down.place(y=69, x=320)
         self.left_p_button2 = tk.Button(self, image = self.uparrow, bg = "#424242", height=60, width=45, bd='1', command=self.inc_p_left)
         self.left_p_button2.place(y=69, x=250)
 
@@ -105,7 +105,12 @@ class SettingsWindow(tk.Toplevel):
 
 
     def close_confirm(self):
-        if (settings.rightSetting != self.right_setting or settings.leftSetting != self.left_setting or settings.topSetting != self.top_setting or settings.bottomSetting != self.bottom_setting or settings.lightSetting != self.light_setting or settings.tempSetting != self.temp_setting):
+        if (settings.RIGHTSETTING != self.right_setting 
+            or settings.LEFTSETTING != self.left_setting
+            or settings.TOPSETTING != self.top_setting 
+            or settings.BOTTOMSETTING != self.bottom_setting
+            or settings.LIGHTSETTING != self.light_setting
+            or settings.TEMPSETTING != self.temp_setting):
             answer = messagebox.askyesno(parent=self, title='Warning!', message='You did not save settings! Do you still want to return?')
             if answer:
                 self.destroy()
@@ -115,12 +120,12 @@ class SettingsWindow(tk.Toplevel):
     def save_settings(self):
         answar = messagebox.askyesno(parent=self, title='Confirm to save altered settings', message='Do you want to save settings?')
         if answar:
-            settings.rightSetting = self.right_setting
-            settings.leftSetting = self.left_setting
-            settings.topSetting = self.top_setting
-            settings.bottomSetting = self.bottom_setting
-            settings.lightSetting = self.light_setting
-            settings.tempSetting = self.temp_setting
+            settings.RIGHTSETTING = self.right_setting
+            settings.LEFTSETTING = self.left_setting
+            settings.TOPSETTING = self.top_setting
+            settings.BOTTOMSETTING = self.bottom_setting
+            settings.LIGHTSETTING = self.light_setting
+            settings.TEMPSETTING = self.temp_setting
             self.destroy()
 
     def inc_light(self):

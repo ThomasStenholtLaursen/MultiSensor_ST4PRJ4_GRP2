@@ -6,17 +6,17 @@ import time
 PRODUCERSLEEP = 0.5
 
 class ForceSensorRead:
-    def readLeft():
-        v = random.randint(40, 100)
+    def read_left():
+        v = random.randint(40, 1000)
         return v
-    def readRight():
-        v = random.randint(40, 100)
+    def read_right():
+        v = random.randint(40, 1000)
         return v
-    def readTop():
-        v = random.randint(40, 100)
+    def read_top():
+        v = random.randint(40, 1000)
         return v
-    def readBottom():
-        v = random.randint(40, 100)
+    def read_bottom():
+        v = random.randint(40, 1000)
         return v
 
 class LightTempSensorRead:
@@ -32,11 +32,11 @@ class ForceProducer:
     def run(self,queue,finished):
         finished.put(False)
         while True:
-            leftread = ForceSensorRead.readLeft()
-            rightread = ForceSensorRead.readRight()       
-            topread = ForceSensorRead.readTop()
-            bottomread = ForceSensorRead.readBottom()      
-            reading = ForceSensorDTO(rightread, leftread, topread, bottomread)
+            right_read = ForceSensorRead.read_right()
+            left_read = ForceSensorRead.read_left()                   
+            top_read = ForceSensorRead.read_top()
+            bottom_read = ForceSensorRead.read_bottom()      
+            reading = ForceSensorDTO(right_read, left_read, top_read, bottom_read)
             queue.put(reading)   
             print("produced: "+ str(reading))
             time.sleep(PRODUCERSLEEP)
