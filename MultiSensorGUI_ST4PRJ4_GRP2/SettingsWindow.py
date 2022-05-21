@@ -1,13 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from DTO import SettingsDTO
-
-right_p_setting = 40
-left_p_setting = 100
-top_p_setting = 100
-bottom_p_setting = 45
-light_setting = 5
-temp_setting = 50
+import config as settings
 
 class SettingsWindow(tk.Toplevel):
     def __init__(self, parent):
@@ -21,6 +14,13 @@ class SettingsWindow(tk.Toplevel):
         #self.attributes('-fullscreen', True)
 
         self.title("Settings window")
+
+        self.right_setting = settings.rightSetting
+        self.left_setting = settings.leftSetting
+        self.top_setting = settings.topSetting
+        self.bottom_setting = settings.bottomSetting
+        self.light_setting = settings.lightSetting
+        self.temp_setting = settings.tempSetting
 
         self.settings_background_image = tk.PhotoImage(file='template_settingsbackground3.png')
         self.settings_background_label = tk.Label(self, image=self.settings_background_image)
@@ -43,26 +43,31 @@ class SettingsWindow(tk.Toplevel):
                        bg='#08b4b5', fg='#ffffff', 
                        activebackground='#077e7f', 
                        activeforeground='#ffffff',
-                       command=self.saveSettingsInDTO)                                              
+                       command=self.save_settings)                                              
         self.saveButton.pack(side=tk.RIGHT, expand=True)
 
-        self.light_label = tk.Label(self, text = light_setting, font=("Segoe UI",18), bg='#ffffff', justify="center")
+        #Settings labels
+        #region
+        self.light_label = tk.Label(self, text = self.light_setting, font=("Segoe UI",18), bg='#ffffff', justify="center")
         self.light_label.place(y=125, x=503)
 
-        self.temp_label = tk.Label(self, text = temp_setting, font=("Segoe UI",18), bg='#ffffff')
+        self.temp_label = tk.Label(self, text = self.temp_setting, font=("Segoe UI",18), bg='#ffffff')
         self.temp_label.place(y=288, x=503)
 
-        self.right_p_label = tk.Label(self, text = right_p_setting, font=("Segoe UI",18), bg='#ffffff')
-        self.right_p_label.place(y=80, x=152)
+        self.left_p_label = tk.Label(self, text = self.left_setting, font=("Segoe UI",18), bg='#ffffff')
+        self.left_p_label.place(y=80, x=152)
 
-        self.left_p_label = tk.Label(self, text = left_p_setting, font=("Segoe UI",18), bg='#ffffff')
-        self.left_p_label.place(y=160, x=152)
+        self.right_p_label = tk.Label(self, text = self.right_setting, font=("Segoe UI",18), bg='#ffffff')
+        self.right_p_label.place(y=160, x=152)
 
-        self.top_p_label = tk.Label(self, text = top_p_setting, font=("Segoe UI",18), bg='#ffffff')
+        self.top_p_label = tk.Label(self, text = self.top_setting, font=("Segoe UI",18), bg='#ffffff')
         self.top_p_label.place(y=240, x=152)
 
-        self.bottom_p_label = tk.Label(self, text = bottom_p_setting, font=("Segoe UI",18), bg='#ffffff')
+        self.bottom_p_label = tk.Label(self, text = self.bottom_setting, font=("Segoe UI",18), bg='#ffffff')
         self.bottom_p_label.place(y=320, x=152)
+        #endregion
+        #Inc/dec buttons
+        #region
 
         self.uparrow = tk.PhotoImage(file='uparrow.png')
         self.downarrow = tk.PhotoImage(file='downarrow.png')
@@ -77,15 +82,15 @@ class SettingsWindow(tk.Toplevel):
         self.temp_button2 = tk.Button(self, image = self.uparrow, bg = "#424242", height=60, width=45, bd='1', command=self.inc_temp)
         self.temp_button2.place(y=276, x=630)
 
-        self.right_p_button1 = tk.Button(self, image = self.downarrow, bg = "#424242", height=60, width=45, bd='1', command=self.dec_p_right)
-        self.right_p_button1.place(y=69, x=320)
-        self.right_p_button2 = tk.Button(self, image = self.uparrow, bg = "#424242", height=60, width=45, bd='1', command=self.inc_p_right)
-        self.right_p_button2.place(y=69, x=250)
-
         self.left_p_button1 = tk.Button(self, image = self.downarrow, bg = "#424242", height=60, width=45, bd='1', command=self.dec_p_left)
-        self.left_p_button1.place(y=149, x=320)
+        self.left_p_button1.place(y=69, x=320)
         self.left_p_button2 = tk.Button(self, image = self.uparrow, bg = "#424242", height=60, width=45, bd='1', command=self.inc_p_left)
-        self.left_p_button2.place(y=149, x=250)
+        self.left_p_button2.place(y=69, x=250)
+
+        self.right_p_button1 = tk.Button(self, image = self.downarrow, bg = "#424242", height=60, width=45, bd='1', command=self.dec_p_right)
+        self.right_p_button1.place(y=149, x=320)
+        self.right_p_button2 = tk.Button(self, image = self.uparrow, bg = "#424242", height=60, width=45, bd='1', command=self.inc_p_right)
+        self.right_p_button2.place(y=149, x=250)
 
         self.top_p_button1 = tk.Button(self, image = self.downarrow, bg = "#424242", height=60, width=45, bd='1', command=self.dec_p_top)
         self.top_p_button1.place(y=229, x=320)
@@ -96,98 +101,98 @@ class SettingsWindow(tk.Toplevel):
         self.bottom_p_button1.place(y=309, x=320)
         self.bottom_p_button2 = tk.Button(self, image = self.uparrow, bg = "#424242", height=60, width=45, bd='1', command=self.inc_p_bottom)
         self.bottom_p_button2.place(y=309, x=250)
-        
+        #endregion
+
 
     def close_confirm(self):
-        answer = messagebox.askyesno(parent=self, title='Closing settings', message='Have you saved your settings?')
-        if answer:
+        if (settings.rightSetting != self.right_setting or settings.leftSetting != self.left_setting or settings.topSetting != self.top_setting or settings.bottomSetting != self.bottom_setting or settings.lightSetting != self.light_setting or settings.tempSetting != self.temp_setting):
+            answer = messagebox.askyesno(parent=self, title='Warning!', message='You did not save settings! Do you still want to return?')
+            if answer:
+                self.destroy()
+        else:
+            self.destroy()
+
+    def save_settings(self):
+        answar = messagebox.askyesno(parent=self, title='Confirm to save altered settings', message='Do you want to save settings?')
+        if answar:
+            settings.rightSetting = self.right_setting
+            settings.leftSetting = self.left_setting
+            settings.topSetting = self.top_setting
+            settings.bottomSetting = self.bottom_setting
+            settings.lightSetting = self.light_setting
+            settings.tempSetting = self.temp_setting
             self.destroy()
 
     def inc_light(self):
-        global light_setting
-        light_setting += 1
-        if light_setting > 10:
-            light_setting = 10
-        self.light_label.config(text=light_setting)
+        self.light_setting += settings.INC_L
+        if self.light_setting >= 10:
+            self.light_setting = 10
+        self.light_label.config(text=self.light_setting)
 
     def dec_light(self):
-        global light_setting
-        light_setting -= 1
-        if light_setting <= 0:
-            light_setting = 1
-        self.light_label.config(text=light_setting)
+        self.light_setting -= settings.DEC_L
+        if self.light_setting <= 1:
+            self.light_setting = 1
+        self.light_label.config(text=self.light_setting)
 
     def inc_temp(self):
-        global temp_setting
-        temp_setting += 2
-        if temp_setting > 90:
-            temp_setting = 90
-        self.temp_label.config(text=temp_setting)
+        self.temp_setting += settings.INC_T
+        if self.temp_setting >= 90:
+            self.temp_setting = 90
+        self.temp_label.config(text=self.temp_setting)
 
     def dec_temp(self):
-        global temp_setting
-        temp_setting -= 2
-        if temp_setting < 10:
-            temp_setting = 10
-        self.temp_label.config(text=temp_setting)
+        self.temp_setting -= settings.DEC_T
+        if self.temp_setting <= 10:
+            self.temp_setting = 10
+        self.temp_label.config(text=self.temp_setting)
 
     def inc_p_right(self):
-        global right_p_setting
-        right_p_setting += 5
-        if right_p_setting > 5000:
-            right_p_setting = 5000
-        self.right_p_label.config(text=right_p_setting)
+        self.right_setting += settings.INC_P
+        if self.right_setting >= 5000:
+            self.right_setting = 5000
+        self.right_p_label.config(text=self.right_setting)
 
     def dec_p_right(self):
-        global right_p_setting
-        right_p_setting -= 5
-        if right_p_setting <= 40:
-            right_p_setting = 40
-        self.right_p_label.config(text=right_p_setting)
+        self.right_setting -= settings.DEC_P
+        if self.right_setting<= 40:
+            self.right_setting = 40
+        self.right_p_label.config(text=self.right_setting)
 
     def inc_p_left(self):
-        global left_p_setting
-        left_p_setting += 5
-        if left_p_setting > 5000:
-            left_p_setting = 5000
-        self.left_p_label.config(text=left_p_setting)
+        self.left_setting += settings.INC_P
+        if self.left_setting >= 5000:
+            self.left_setting = 5000
+        self.left_p_label.config(text=self.left_setting)
 
     def dec_p_left(self):
-        global left_p_setting
-        left_p_setting -= 5
-        if left_p_setting <= 40:
-            left_p_setting = 40
-        self.left_p_label.config(text=left_p_setting)
+        self.left_setting -= settings.DEC_P
+        if self.left_setting <= 40:
+            self.left_setting = 40
+        self.left_p_label.config(text=self.left_setting)
 
     def inc_p_top(self):
-        global top_p_setting
-        top_p_setting += 5
-        if top_p_setting > 5000:
-            top_p_setting = 5000
-        self.top_p_label.config(text=top_p_setting)
+        self.top_setting += settings.INC_P
+        if self.top_setting >= 5000:
+            self.top_setting = 5000
+        self.top_p_label.config(text=self.top_setting)
 
     def dec_p_top(self):
-        global top_p_setting
-        top_p_setting -= 5
-        if top_p_setting <= 40:
-            top_p_setting = 40
-        self.top_p_label.config(text=top_p_setting)
+        self.top_setting -= settings.DEC_P
+        if self.top_setting <= 40:
+            self.top_setting = 40
+        self.top_p_label.config(text=self.top_setting)
 
     def inc_p_bottom(self):
-        global bottom_p_setting
-        bottom_p_setting += 5
-        if bottom_p_setting > 5000:
-            bottom_p_setting = 5000
-        self.bottom_p_label.config(text=bottom_p_setting)
+        self.bottom_setting += settings.INC_P
+        if self.bottom_setting >= 5000:
+            self.bottom_setting = 5000
+        self.bottom_p_label.config(text=self.bottom_setting)
 
     def dec_p_bottom(self):
-        global bottom_p_setting
-        bottom_p_setting -= 5
-        if bottom_p_setting <= 40:
-            bottom_p_setting = 40
-        self.bottom_p_label.config(text=bottom_p_setting)
+        self.bottom_setting -= settings.DEC_P
+        if self.bottom_setting <= 40:
+            self.bottom_setting = 40
+        self.bottom_p_label.config(text=self.bottom_setting)
 
-    def saveSettingsInDTO(self):
-        setting = SettingsDTO(right_p_setting,left_p_setting,top_p_setting,bottom_p_setting,light_setting,temp_setting)
-        print("saved in settingsdto: " + str(setting))
 

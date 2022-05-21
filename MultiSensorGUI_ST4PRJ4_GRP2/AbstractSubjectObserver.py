@@ -17,5 +17,7 @@ class Subject(ABC):
 
 class Observer(ABC):
     @abstractmethod
-    def update(self, subject: Subject) -> None:
+    def update_force(self, subject: Subject) -> None:
+        pass
+    def update_lt(self, subject: Subject) -> None:
         pass

@@ -3,7 +3,7 @@ from AbstractSubjectObserver import Subject, Observer
 from typing import List
 import time
 
-
+CONSUMERSLEEP = 0.1
 
 class ForceConsumer:
     @property
@@ -45,7 +45,7 @@ class ForceConsumer:
 
     def notify(self) -> None:
         for observer in self._observers:
-            observer.update(self)
+            observer.update_force(self)
 
 
 
@@ -65,7 +65,7 @@ class ForceConsumer:
                 print(ForceConsumer.leftreadingprop, ForceConsumer.rightreadingprop, ForceConsumer.topreadingprop, ForceConsumer.bottomreadingprop)
                 
             else:
-                time.sleep(0.1)
+                time.sleep(CONSUMERSLEEP)
 
 class LightTempConsumer:
     @property
@@ -92,7 +92,7 @@ class LightTempConsumer:
 
     def notify(self) -> None:
         for observer in self._observers:
-            observer.update(self)
+            observer.update_lt(self)
 
 
     def run(self,work,finished):
@@ -106,17 +106,17 @@ class LightTempConsumer:
                 LightTempConsumer.tempreadingprop = convertTempValue(litedto.temp)
                 self.notify()
             else:
-                time.sleep(0.1)
+                time.sleep(CONSUMERSLEEP)
 
 def convertForceValue(reading : int):
-    convertedValue = reading*3
+    convertedValue = reading*1
     return convertedValue
 
 def convertTempValue(reading : int):
-    convertedValue = reading*6
+    convertedValue = reading*1
     return convertedValue
 
 def convertLightValue(reading : int):
-    convertedValue = reading*9
+    convertedValue = reading*1
     return convertedValue
 

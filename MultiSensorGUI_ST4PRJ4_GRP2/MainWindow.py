@@ -1,12 +1,14 @@
 import tkinter as tk
 from tkinter import messagebox
 from SettingsWindow import SettingsWindow
+from AbstractSubjectObserver import Observer, Subject
+import config as settings
 
 GREEN = '#00ff30'
 RED = '#ff2323'
 
 
-class MainWindow(tk.Tk):
+class MainWindow(tk.Tk, Observer):
     def __init__(self):
         super().__init__()
 
@@ -49,7 +51,7 @@ class MainWindow(tk.Tk):
                        command=self.open_window)
         self.settingsButton.pack(side=tk.RIGHT, expand=True)
 
-        self.temp_label = tk.Label(self, font=("Segoe UI", 20), text="70", bg='#424242',fg='red')
+        self.temp_label = tk.Label(self, font=("Segoe UI", 20), text="70", bg='#424242',fg=RED)
         self.temp_label.place(y=300, x=130)
 
     def open_window(self):
@@ -59,28 +61,38 @@ class MainWindow(tk.Tk):
     def close_confirm(self):
         answer = messagebox.askokcancel(title='Closing Program', message='Are you sure that you want to quit?')
         if answer:
-            self.destroy()   
+            self.destroy()
 
-    def redRight(self):
-        self.right.configure(bg=RED)
+    def update_force(self, subject: Subject) -> None:
+        if subject.leftreadingprop > settings.leftSetting:
+            self.left.configure(bg=RED)
+        else:
+            self.left.configure(bg=GREEN)
 
-    def greenRight(self):
-        self.right.configure(bg=GREEN)
+        if subject.rightreadingprop > settings.rightSetting:
+            self.right.configure(bg=RED)
+        else:
+            self.right.configure(bg=GREEN)
 
-    def redLeft(self):
-        self.left.configure(bg=RED)
+        if subject.topreadingprop > settings.topSetting:
+            self.top.configure(bg=RED)
+        else:
+            self.top.configure(bg=GREEN)
 
-    def greenLeft(self):
-        self.left.configure(bg=GREEN)
+        if subject.bottomreadingprop > settings.bottomSetting:
+            self.bottom.configure(bg=RED)
+        else:
+            self.bottom.configure(bg=GREEN)
 
-    def redTop(self):
-        self.top.configure(bg=RED)
+    def update_lt(self, subject: Subject) -> None:
 
-    def greenTop(self):
-        self.top.configure(bg=GREEN)
+        if subject.lightreadingprop > settings.lightSetting:
+            self.light.configure(bg=RED)
+        else:
+            self.light.configure(bg=GREEN)
 
-    def redBottom(self):
-        self.bottom.configure(bg=RED)
-
-    def greenBottom(self):
-        self.bottom.configure(bg=GREEN)
+        self.temp_label.configure(text=subject.tempreadingprop)
+        if subject.tempreadingprop > settings.tempSetting:
+            self.temp_label.configure(fg=RED)
+        else:
+            self.temp_label.configure(fg=GREEN)
