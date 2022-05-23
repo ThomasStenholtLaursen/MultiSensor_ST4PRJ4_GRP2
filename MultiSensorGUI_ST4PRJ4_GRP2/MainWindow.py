@@ -5,6 +5,7 @@ from AbstractSubjectObserver import Observer, Subject
 import config as settings
 
 GREEN = '#00ff30'
+YELLOW ='#ffde00'
 RED = '#ff2323'
 
 
@@ -35,6 +36,10 @@ class MainWindow(tk.Tk, Observer):
         self.temp_label = tk.Label(self, font=("Segoe UI", 20), bg='#424242',fg=RED)
         self.temp_label.place(y=300, x=130)
 
+        self.information = tk.PhotoImage(file='info.png')
+        self.information_button = tk.Button(self, image = self.information, bg = "#08b5b5", activebackground='#08b5b5', bd='0', command=self.information_message)
+        self.information_button.place(y=10, x=750)
+
         self.frame = tk.Frame(self)
         self.frame.configure(bg='#424242')
         self.frame.place(relwidth=1, y=410, height=70)
@@ -64,23 +69,35 @@ class MainWindow(tk.Tk, Observer):
         if answer:
             self.destroy()
 
+    def information_message(self):
+        messagebox.showinfo("Information", "------------------LIGHT DETECTION------------------\nRed color = too much light polution\nGreen color = light polution OK\n\n\n-------------TEMPERATURE DETECTION-------------\nRed color = temperature too high\nGreen color = temperature OK\n\n\n------------------FORCE DETECTION------------------\nRed color = too much force (above threshold)\nYellow color = not enough force\nGreen color = adequate force")
+
+
     def update_force(self, subject: Subject) -> None:
-        if subject.leftreadingprop > settings.LEFTSETTING:
+        if subject.leftreadingprop < settings.NOREG_LEFT:
+            self.left.configure(bg=YELLOW)
+        elif subject.leftreadingprop > settings.LEFTSETTING:
             self.left.configure(bg=RED)
         else:
             self.left.configure(bg=GREEN)
 
-        if subject.rightreadingprop > settings.RIGHTSETTING:
+        if subject.rightreadingprop < settings.NOREG_RIGHT:
+            self.right.configure(bg=YELLOW)
+        elif subject.rightreadingprop > settings.RIGHTSETTING:
             self.right.configure(bg=RED)
         else:
             self.right.configure(bg=GREEN)
 
-        if subject.topreadingprop > settings.TOPSETTING:
+        if subject.topreadingprop < settings.NOREG_TOP:
+            self.top.configure(bg=YELLOW)
+        elif subject.topreadingprop > settings.TOPSETTING:
             self.top.configure(bg=RED)
         else:
             self.top.configure(bg=GREEN)
 
-        if subject.bottomreadingprop > settings.BOTTOMSETTING:
+        if subject.bottomreadingprop < settings.NOREG_BOTTOM:
+            self.bottom.configure(bg=YELLOW)
+        elif subject.bottomreadingprop > settings.BOTTOMSETTING:
             self.bottom.configure(bg=RED)
         else:
             self.bottom.configure(bg=GREEN)
