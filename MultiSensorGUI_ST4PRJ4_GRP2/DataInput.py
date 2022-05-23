@@ -126,7 +126,7 @@ class ForceProducer:
             readingdto = ForceSensorDTO(convertForceValue(ForceSensorRead.read_right()), convertForceValue(ForceSensorRead.read_left()),convertForceValue(ForceSensorRead.read_top()),convertForceValue(ForceSensorRead.read_bottom()))
             queue.put(readingdto)   
             #print("produced: "+ str(reading))
-            print("Right force reading:" + str(reading.right))
+            print("Right force reading:" + str(readingdto.right))
             time.sleep(PRODUCERSLEEP)
         finished.put(True)
         print('finished')
