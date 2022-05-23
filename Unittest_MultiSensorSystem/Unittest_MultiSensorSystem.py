@@ -8,7 +8,8 @@ class TestLightTempSensor(unittest.TestCase):
         
 
     def test_Light(self):
-        self.fail("Not implemented")
+
+
     def test_threshold(self)
         
 
