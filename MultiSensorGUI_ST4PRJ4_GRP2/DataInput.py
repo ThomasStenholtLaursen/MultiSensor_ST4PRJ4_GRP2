@@ -60,9 +60,6 @@ i2c = busio.I2C(board.SCL, board.SDA)
 # Create the ADC object using the I2C bus
 adslight = ADS.ADS1015(i2c=i2c,gain=2/3, address=0x48)
 adsforce = ADS.ADS1015(i2c=i2c,gain=1, address=0x49)
-#print("{:>5}\t{:>5}".format("raw", "v"))
-
-#print("Voltage read from force:" + str(forceread.voltage))
 
 
 #time.sleep(1)
@@ -154,10 +151,8 @@ class LightTempProducer:
         finished.put(False)
         while True:
             lightTempReading = LightTempDTO(convertLightValue(LightTempSensorRead.readLight()), LightTempSensorRead.readTemp())
-            #print("Voltage read from light:" + str(lightTempReading.light))
             queue.put(lightTempReading) 
             time.sleep(PRODUCERSLEEP)
         finished.put(True)
-        print('finished')
     
 
