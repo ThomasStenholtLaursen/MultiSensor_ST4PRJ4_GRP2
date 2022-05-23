@@ -20,7 +20,7 @@ INC_T = 5
 DEC_T = 5
 
 #Default value for no force detected
-NOREG_LEFT = 70
-NOREG_RIGHT = 70
-NOREG_TOP = 70
-NOREG_BOTTOM = 70
+NOREG_LEFT = 60
+NOREG_RIGHT = 60
+NOREG_TOP = 60
+NOREG_BOTTOM = 60
