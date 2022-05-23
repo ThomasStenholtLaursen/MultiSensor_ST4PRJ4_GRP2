@@ -10,7 +10,7 @@ import adafruit_ads1x15.ads1015 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 import math as math
 
-PRODUCERSLEEP = 0.5
+PRODUCERSLEEP = 0.1
 
 class ForceSensorRead:
     def read_left():
