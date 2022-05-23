@@ -154,7 +154,7 @@ class ForceSensorRead:
         return v
 
 class LightTempSensorRead:
-    def lightinvert(i):
+    def lightinvert(self, i):
         invert = 0
         if i == 0:
             invert = 10
@@ -184,7 +184,7 @@ class LightTempSensorRead:
 def convertLightValue(reading : float):
         x = (reading/4.94)*100 #gives light input in percentage
         s = int(x/10)
-        l = lightinvert(s)
+        l = self.lightinvert(s)
         return l
 
 
