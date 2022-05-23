@@ -97,7 +97,7 @@ class ForceSensorRead:
         return v
     def read_right():
         value = AnalogIn(adsforce, ADS.P0)
-        print(value)
+        print(value.voltage)
         v = round(value.voltage,2)
         return v
     def read_top():
