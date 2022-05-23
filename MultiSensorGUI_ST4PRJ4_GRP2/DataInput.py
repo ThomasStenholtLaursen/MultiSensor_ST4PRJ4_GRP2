@@ -67,7 +67,7 @@ forcerightread = AnalogIn(adsforce, ADS.P0)
 
 #print("{:>5}\t{:>5}".format("raw", "v"))
 #print("Voltage read from force:" + str(forceread.voltage))
-print("Voltage read from light:" + str(lightadcvalue.voltage))
+
 
 
 #time.sleep(1)
@@ -155,6 +155,7 @@ class LightTempProducer:
             lightread = LightTempSensorRead.readLight()
             tempread = LightTempSensorRead.readTemp()
             lightTempReading = LightTempDTO(convertLightValue(lightread), tempread)
+            print("Voltage read from light:" + str(lightread))
             queue.put(lightTempReading) 
             time.sleep(PRODUCERSLEEP)
         finished.put(True)
