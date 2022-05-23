@@ -22,7 +22,7 @@ class SettingsWindow(tk.Toplevel):
         self.light_setting = settings.LIGHTSETTING
         self.temp_setting = settings.TEMPSETTING
 
-        self.settings_background_image = tk.PhotoImage(file='template_settingsbackground3.png')
+        self.settings_background_image = tk.PhotoImage(file='template_settingsbackground4.png')
         self.settings_background_label = tk.Label(self, image=self.settings_background_image)
         self.settings_background_label.place(relwidth=1, relheight=1)
 
