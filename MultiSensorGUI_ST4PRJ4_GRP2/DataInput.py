@@ -93,7 +93,7 @@ class LightTempSensorRead:
 
 class ForceSensorRead:
     def read_left():
-        v = random.randint(40, 1000)
+        v = random.randint(1, 59)
         return v
     def read_right():
         value = AnalogIn(adsforce, ADS.P0)
