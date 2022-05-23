@@ -60,14 +60,9 @@ i2c = busio.I2C(board.SCL, board.SDA)
 # Create the ADC object using the I2C bus
 adslight = ADS.ADS1015(i2c=i2c,gain=2/3, address=0x48)
 adsforce = ADS.ADS1015(i2c=i2c,gain=1, address=0x49)
-
-# Create single-ended input on channel 0
-
-forcerightread = AnalogIn(adsforce, ADS.P0)
-
 #print("{:>5}\t{:>5}".format("raw", "v"))
-#print("Voltage read from force:" + str(forceread.voltage))
 
+#print("Voltage read from force:" + str(forceread.voltage))
 
 
 #time.sleep(1)
@@ -115,8 +110,8 @@ class ForceSensorRead:
         v = random.randint(40, 1000)
         return v
     def read_right():
-        v = random.randint(40, 1000)
-        return v
+        value = AnalogIn(adsforce, ADS.P0)
+        return value.voltage
     def read_top():
         v = random.randint(40, 1000)
         return v
@@ -125,12 +120,13 @@ class ForceSensorRead:
         return v
 
 
-def convertForceValue(reading : int):
-    convertedValue = reading*1
-    return convertedValue
+def convertForceValue(reading : float):
+        x = 1.215214485*reading + 3.761939482
+        y = int(math.pow(math.e, x))
+        return y
 
-def convertLightValue(reading : int):
-        x = (LightTempSensorRead.readLight()/4.94)*100 #gives light input in percentage
+def convertLightValue(reading : float):
+        x = (reading/4.94)*100 #gives light input in percentage
         s = int(x/10)
         l = lightinvert(s)
         return l
@@ -153,10 +149,8 @@ class LightTempProducer:
     def run(self,queue,finished):
         finished.put(False)
         while True:
-            lightread = LightTempSensorRead.readLight()
-            tempread = LightTempSensorRead.readTemp()
-            lightTempReading = LightTempDTO(convertLightValue(lightread), tempread)
-            print("Voltage read from light:" + str(lightread))
+            lightTempReading = LightTempDTO(convertLightValue(LightTempSensorRead.readLight()), LightTempSensorRead.readTemp)
+            print("Voltage read from light:" + str(lightTempReading.light))
             queue.put(lightTempReading) 
             time.sleep(PRODUCERSLEEP)
         finished.put(True)
