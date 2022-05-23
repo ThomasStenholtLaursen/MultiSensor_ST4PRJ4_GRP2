@@ -100,11 +100,37 @@ def lightinvert(i):
 
 
 class LightTempSensorRead:
-    
+    def lightinvert(i):
+        invert = 0
+        if i == 0:
+            invert = 10
+        elif i == 1:
+            invert = 9
+        elif i == 2:
+            invert = 8
+        elif i == 3:
+            invert = 7
+        elif i == 4:
+            invert = 6
+        elif i == 5:
+            invert = 5
+        elif i == 6:
+            invert = 4
+        elif i == 7:
+            invert = 3
+        elif i == 8:
+            invert = 2
+        elif i == 9:
+            invert = 1
+        else:
+            invert = 1
+        return invert
+
+
     def readLight():
         x = (lightadc.voltage/4.94)*100 #gives light input in percentage
         s = int(x/10)
-        l = lightswitchcase(s)
+        l = lightinvert(s)
         return l
     def readTemp():
         v = random.randint(10, 90)
