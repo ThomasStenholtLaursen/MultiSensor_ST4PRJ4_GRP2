@@ -120,12 +120,12 @@ class ForceSensorRead:
         return v
 
 
-def convertForceValue(self,reading):
+def convertForceValue(reading):
         x = 1.215214485*reading + 3.761939482
         y = int(math.pow(math.e, x))
         return y
 
-def convertLightValue(self,reading):
+def convertLightValue(reading):
         x = (reading/4.94)*100 #gives light input in percentage
         s = int(x/10)
         l = lightinvert(s)
@@ -136,7 +136,7 @@ class ForceProducer:
     def run(self,queue,finished):
         finished.put(False)
         while True:    
-            readingdto = ForceSensorDTO(convertForceValue(ForceSensorRead.read_right), convertForceValue(ForceSensorRead.read_left),convertForceValue(ForceSensorRead.read_top),convertForceValue(ForceSensorRead.read_bottom))
+            readingdto = ForceSensorDTO(convertForceValue(ForceSensorRead.read_right()), convertForceValue(ForceSensorRead.read_left()),convertForceValue(ForceSensorRead.read_top()),convertForceValue(ForceSensorRead.read_bottom()))
             queue.put(readingdto)   
             #print("produced: "+ str(reading))
             print("Right force reading:" + str(reading.right))
@@ -149,7 +149,7 @@ class LightTempProducer:
     def run(self,queue,finished):
         finished.put(False)
         while True:
-            lightTempReading = LightTempDTO(convertLightValue(LightTempSensorRead.readLight()), LightTempSensorRead.readTemp)
+            lightTempReading = LightTempDTO(convertLightValue(LightTempSensorRead.readLight()), LightTempSensorRead.readTemp())
             #print("Voltage read from light:" + str(lightTempReading.light))
             queue.put(lightTempReading) 
             time.sleep(PRODUCERSLEEP)
