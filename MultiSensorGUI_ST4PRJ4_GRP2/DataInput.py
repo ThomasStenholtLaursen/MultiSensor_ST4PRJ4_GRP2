@@ -60,8 +60,14 @@ i2c = busio.I2C(board.SCL, board.SDA)
 # Create the ADC object using the I2C bus
 adslight = ADS.ADS1015(i2c=i2c,gain=2/3, address=0x48)
 adsforce = ADS.ADS1015(i2c=i2c,gain=1, address=0x49)
+
+# Create single-ended input on channel 0
+#forcerightread = AnalogIn(adsforce, ADS.P0)
+lightadc = AnalogIn(adslight, ADS.P0)
+
 #print("{:>5}\t{:>5}".format("raw", "v"))
 #print("Voltage read from force:" + str(forceread.voltage))
+print("Voltage read from light:" + str(lightadc.voltage))
 
 
 #time.sleep(1)
@@ -96,9 +102,10 @@ def lightinvert(i):
 class LightTempSensorRead:
     
     def readLight():
-        lightadcvalue = AnalogIn(adslight, ADS.P0)
-        return lightadcvalue.voltage
-        
+        x = (lightadc.voltage/4.94)*100 #gives light input in percentage
+        s = int(x/10)
+        l = lightswitchcase(s)
+        return l
     def readTemp():
         v = random.randint(10, 90)
         return v
