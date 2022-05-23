@@ -124,7 +124,8 @@ class ForceProducer:
         while True:    
             reading = ForceSensorDTO(convertForceValue(ForceSensorRead.read_right), convertForceValue(ForceSensorRead.read_left),convertForceValue(ForceSensorRead.read_top),convertForceValue(ForceSensorRead.read_bottom))
             queue.put(reading)   
-            print("produced: "+ str(reading))
+            #print("produced: "+ str(reading))
+            print("Right force reading:" + str(reading.right))
             time.sleep(PRODUCERSLEEP)
         finished.put(True)
         print('finished')
@@ -135,7 +136,7 @@ class LightTempProducer:
         finished.put(False)
         while True:
             lightTempReading = LightTempDTO(convertLightValue(LightTempSensorRead.readLight()), LightTempSensorRead.readTemp)
-            print("Voltage read from light:" + str(lightTempReading.light))
+            #print("Voltage read from light:" + str(lightTempReading.light))
             queue.put(lightTempReading) 
             time.sleep(PRODUCERSLEEP)
         finished.put(True)
