@@ -112,7 +112,7 @@ def convertForceValue(reading):
         m = round(reading,2)
         x = 1.2152*reading + 3.762
         j = round(x,2)
-        y = int(2.7183**j)
+        y = int(round(2.7183**j,3))
         return y
 
 def convertLightValue(reading):
