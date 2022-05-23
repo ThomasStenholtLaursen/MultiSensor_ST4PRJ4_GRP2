@@ -137,24 +137,7 @@ print("Voltage read from light:" + str(lightadc.voltage))
 
 #time.sleep(1)
 
-
-
-class ForceSensorRead:
-    def read_left():
-        v = random.randint(40, 1000)
-        return v
-    def read_right():
-        value = AnalogIn(adsforce, ADS.P0)
-        return value.voltage
-    def read_top():
-        v = random.randint(40, 1000)
-        return v
-    def read_bottom():
-        v = random.randint(40, 1000)
-        return v
-
-class LightTempSensorRead:
-    def lightinvert(self, i):
+def lightinvert(i):
         invert = 0
         if i == 0:
             invert = 10
@@ -181,12 +164,15 @@ class LightTempSensorRead:
         return invert
 
 
-def convertLightValue(reading : float):
-        x = (reading/4.94)*100 #gives light input in percentage
+    def readLight(self):
+        x = (lightadc.voltage/4.94)*100 #gives light input in percentage
         s = int(x/10)
-        l = self.lightinvert(s)
+        l = lightinvert(s)
         return l
-
+    def readTemp(self):
+        t = int(read_temp())
+        return t
+    
 
 class ForceProducer:
     def run(self,queue,finished):
