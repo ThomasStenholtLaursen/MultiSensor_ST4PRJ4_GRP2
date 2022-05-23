@@ -62,12 +62,12 @@ adslight = ADS.ADS1015(i2c=i2c,gain=2/3, address=0x48)
 adsforce = ADS.ADS1015(i2c=i2c,gain=1, address=0x49)
 
 # Create single-ended input on channel 0
-#forcerightread = AnalogIn(adsforce, ADS.P0)
-lightadc = AnalogIn(adslight, ADS.P0)
+
+forcerightread = AnalogIn(adsforce, ADS.P0)
 
 #print("{:>5}\t{:>5}".format("raw", "v"))
 #print("Voltage read from force:" + str(forceread.voltage))
-print("Voltage read from light:" + str(lightadc.voltage))
+print("Voltage read from light:" + str(lightadcvalue.voltage))
 
 
 #time.sleep(1)
@@ -98,6 +98,18 @@ def lightinvert(i):
             invert = 1
         return invert
 
+
+
+def convertForceValue(reading : int):
+    convertedValue = reading*1
+    return convertedValue
+
+def convertLightValue(reading : int):
+        x = (readLight()/4.94)*100 #gives light input in percentage
+        s = int(x/10)
+        l = lightinvert(s)
+        return l
+
 class ForceSensorRead:
     def read_left():
         v = random.randint(40, 1000)
@@ -115,10 +127,9 @@ class ForceSensorRead:
 class LightTempSensorRead:
     
     def readLight():
-        x = (lightadc.voltage/4.94)*100 #gives light input in percentage
-        s = int(x/10)
-        l = lightinvert(s)
-        return l
+        lightadcvalue = AnalogIn(adslight, ADS.P0)
+        return lightadcvalue.voltage
+        
     def readTemp():
         t = int(read_temp())
         return t
@@ -143,9 +154,8 @@ class LightTempProducer:
         while True:
             lightread = LightTempSensorRead.readLight()
             tempread = LightTempSensorRead.readTemp()
-            lightTempReading = LightTempDTO(lightread, tempread)
-            queue.put(lightTempReading)   
-            print("produced: "+ str(lightTempReading))
+            lightTempReading = LightTempDTO(convertLightValue(lightread), tempread)
+            queue.put(lightTempReading) 
             time.sleep(PRODUCERSLEEP)
         finished.put(True)
         print('finished')
