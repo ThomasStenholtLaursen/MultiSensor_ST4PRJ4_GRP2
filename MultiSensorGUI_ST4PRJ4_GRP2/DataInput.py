@@ -128,12 +128,12 @@ adsforce = ADS.ADS1015(i2c=i2c,gain=1, address=0x49)
 
 # Create single-ended input on channel 0
 #forcerightread = AnalogIn(adsforce, ADS.P0)
-lightread = AnalogIn(adslight, ADS.P0)
+lightadc = AnalogIn(adslight, ADS.P0)
 
 #print("{:>5}\t{:>5}".format("raw", "v"))
 
 #print("Voltage read from force:" + str(forceread.voltage))
-print("Voltage read from light:" + str(lightread.voltage))
+print("Voltage read from light:" + str(lightadc.voltage))
 
 #time.sleep(1)
 
