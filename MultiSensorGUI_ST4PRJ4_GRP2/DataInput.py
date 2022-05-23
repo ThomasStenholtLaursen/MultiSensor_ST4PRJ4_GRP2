@@ -120,12 +120,12 @@ class ForceSensorRead:
         return v
 
 
-def convertForceValue(reading):
+def convertForceValue(self,reading):
         x = 1.215214485*reading + 3.761939482
         y = int(math.pow(math.e, x))
         return y
 
-def convertLightValue(reading):
+def convertLightValue(self,reading):
         x = (reading/4.94)*100 #gives light input in percentage
         s = int(x/10)
         l = lightinvert(s)
