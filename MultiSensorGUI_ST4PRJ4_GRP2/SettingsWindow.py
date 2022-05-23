@@ -159,8 +159,8 @@ class SettingsWindow(tk.Toplevel):
 
     def dec_p_right(self):
         self.right_setting -= settings.DEC_P
-        if self.right_setting<= 40:
-            self.right_setting = 40
+        if self.right_setting<= 60:
+            self.right_setting = 60
         self.right_p_label.config(text=self.right_setting)
 
     def inc_p_left(self):
@@ -171,8 +171,8 @@ class SettingsWindow(tk.Toplevel):
 
     def dec_p_left(self):
         self.left_setting -= settings.DEC_P
-        if self.left_setting <= 40:
-            self.left_setting = 40
+        if self.left_setting <= 60:
+            self.left_setting = 60
         self.left_p_label.config(text=self.left_setting)
 
     def inc_p_top(self):
@@ -183,8 +183,8 @@ class SettingsWindow(tk.Toplevel):
 
     def dec_p_top(self):
         self.top_setting -= settings.DEC_P
-        if self.top_setting <= 40:
-            self.top_setting = 40
+        if self.top_setting <= 60:
+            self.top_setting = 60
         self.top_p_label.config(text=self.top_setting)
 
     def inc_p_bottom(self):
@@ -195,8 +195,8 @@ class SettingsWindow(tk.Toplevel):
 
     def dec_p_bottom(self):
         self.bottom_setting -= settings.DEC_P
-        if self.bottom_setting <= 40:
-            self.bottom_setting = 40
+        if self.bottom_setting <= 60:
+            self.bottom_setting = 60
         self.bottom_p_label.config(text=self.bottom_setting)
 
 

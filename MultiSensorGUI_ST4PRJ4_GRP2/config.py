@@ -18,3 +18,9 @@ DEC_L = 1
 #Increments/decrements in settings for temperature sensor sensitivity
 INC_T = 5
 DEC_T = 5
+
+#Default value for no force detected
+NOREG_LEFT = 70
+NOREG_RIGHT = 70
+NOREG_TOP = 70
+NOREG_BOTTOM = 70
