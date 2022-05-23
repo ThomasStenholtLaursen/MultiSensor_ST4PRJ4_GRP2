@@ -150,7 +150,7 @@ class LightTempProducer:
         finished.put(False)
         while True:
             lightTempReading = LightTempDTO(convertLightValue(LightTempSensorRead.readLight()), LightTempSensorRead.readTemp)
-            print("Voltage read from light:" + str(lightTempReading.light))
+            #print("Voltage read from light:" + str(lightTempReading.light))
             queue.put(lightTempReading) 
             time.sleep(PRODUCERSLEEP)
         finished.put(True)
