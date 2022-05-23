@@ -109,7 +109,7 @@ class ForceSensorRead:
 def convertForceValue(reading):
         x = 1.2152*reading + 3.762
         j = round(x,5)
-        y = int(math.pow(math.e, j))
+        y = int(math.e**j)
         return y
 
 def convertLightValue(reading):
