@@ -42,7 +42,7 @@ def main():
         lightTempConsumerThread.start()
 
     ###For fullscreen on RPI include the next line of code###
-    #app.attributes('-fullscreen', True)
+    app.attributes('-fullscreen', True)
 
     app.after(0, runSensorThreads)
     
