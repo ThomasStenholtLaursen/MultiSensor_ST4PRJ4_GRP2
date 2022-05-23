@@ -93,18 +93,20 @@ class LightTempSensorRead:
 
 class ForceSensorRead:
     def read_left():
-        v = random.randint(1, 5)
+        value = AnalogIn(adsforce, ADS.P0)
+        v = value.voltage
         return v
     def read_right():
-        value = AnalogIn(adsforce, ADS.P0)
-        print(value.voltage)
-        v = round(value.voltage,2)
+        value = AnalogIn(adsforce, ADS.P1)
+        v = value.voltage
         return v
     def read_top():
-        v = random.randint(1, 5)
+        value = AnalogIn(adsforce, ADS.P2)
+        v = value.voltage
         return v
     def read_bottom():
-        v = random.randint(1, 5)
+        value = AnalogIn(adsforce, ADS.P3)
+        v = value.voltage
         return v
 
 
@@ -125,15 +127,12 @@ def convertLightValue(reading):
 class ForceProducer:
     def run(self,queue,finished):
         finished.put(False)
-        while True: 
-            print(ForceSensorRead.read_right())
+        while True:
             readingdto = ForceSensorDTO(convertForceValue(ForceSensorRead.read_right()), convertForceValue(ForceSensorRead.read_left()),convertForceValue(ForceSensorRead.read_top()),convertForceValue(ForceSensorRead.read_bottom()))
             queue.put(readingdto)   
-            #print("produced: "+ str(reading))
-            print("Right force reading:" + str(readingdto.right))
+            print("force reading:" + str(readingdto.right) + " , " + str(readingdto.left) + " , " + str(readingdto.top) + " , " + str(readingdto.bottom))
             time.sleep(PRODUCERSLEEP)
         finished.put(True)
-        print('finished')
 
 
 class LightTempProducer:

@@ -54,7 +54,6 @@ class ForceConsumer:
         while True:
             if not work.empty():
                 dto = work.get()
-                print('Consuming values')
                 print(dto.left, dto.right, dto.bottom,dto.top)
                 ForceConsumer.leftreadingprop = dto.left
                 ForceConsumer.rightreadingprop = dto.right
@@ -98,8 +97,6 @@ class LightTempConsumer:
         while True:
             if not work.empty():
                 litedto = work.get()
-                print('Consuming values')
-                print(litedto.light, litedto.temp)
                 LightTempConsumer.lightreadingprop = litedto.light
                 LightTempConsumer.tempreadingprop = litedto.temp
                 self.notify()
