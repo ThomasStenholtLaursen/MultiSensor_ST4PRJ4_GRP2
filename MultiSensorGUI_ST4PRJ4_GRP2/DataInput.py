@@ -93,6 +93,7 @@ class LightTempSensorRead:
 
 
 #regarding temperature:
+#region
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
  
@@ -115,25 +116,24 @@ def read_temp():
     if equals_pos != -1:
         temp_string = lines[1][equals_pos+2:]
         temp_c = float(temp_string) / 1000.0
-        temp_f = temp_c * 9.0 / 5.0 + 32.0
         return temp_c
-
+#endregion
 
 # Create the I2C bus
 i2c = busio.I2C(board.SCL, board.SDA)
 
 # Create the ADC object using the I2C bus
-adsforce = ADS.ADS1015(i2c=i2c,gain=2/3, address=0x48)
-adslight = ADS.ADS1015(i2c=i2c,gain=2/3, address=0x49)
+adslight = ADS.ADS1015(i2c=i2c,gain=2/3, address=0x48)
+adsforce = ADS.ADS1015(i2c=i2c,gain=1, address=0x49)
 
 # Create single-ended input on channel 0
 #forcerightread = AnalogIn(adsforce, ADS.P0)
-#lightread = AnalogIn(adslight, ADS.P0)
+lightread = AnalogIn(adslight, ADS.P0)
 
 #print("{:>5}\t{:>5}".format("raw", "v"))
 
 #print("Voltage read from force:" + str(forceread.voltage))
-#print("Voltage read from light:" + str(lightread.voltage))
+print("Voltage read from light:" + str(lightread.voltage))
 
 #time.sleep(1)
 
