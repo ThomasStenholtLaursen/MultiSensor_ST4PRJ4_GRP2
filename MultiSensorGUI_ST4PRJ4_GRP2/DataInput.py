@@ -116,7 +116,7 @@ def convertForceValue(reading : int):
     return convertedValue
 
 def convertLightValue(reading : int):
-        x = (readLight()/4.94)*100 #gives light input in percentage
+        x = (LightTempSensorRead.readLight()/4.94)*100 #gives light input in percentage
         s = int(x/10)
         l = lightinvert(s)
         return l
