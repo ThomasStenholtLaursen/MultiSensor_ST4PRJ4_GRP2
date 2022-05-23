@@ -75,26 +75,37 @@ class ForceSensorRead:
         return v
 
 class LightTempSensorRead:
-    def lightswitchcase(i):
-        switcher={
-            0: 10,
-            1: 9,
-            2: 8,
-            3: 7,
-            4: 6,
-            5: 5,
-            6: 4,
-            7: 3,
-            8: 2,
-            9: 1,
-            10: 1,
-            }
-        return switcher.get(i)
+    def lightinvert(i):
+        invert = 0
+        if i == 0:
+            invert = 10
+        elif i == 1:
+            invert = 9
+        elif i == 2:
+            invert = 8
+        elif i == 3:
+            invert = 7
+        elif i == 4:
+            invert = 6
+        elif i == 5:
+            invert = 5
+        elif i == 6:
+            invert = 4
+        elif i == 7:
+            invert = 3
+        elif i == 8:
+            invert = 2
+        elif i == 9:
+            invert = 1
+        else:
+            invert = 1
+        return invert
+
 
     def readLight():
         x = (lightadc.voltage/4.94)*100 #gives light input in percentage
         s = int(x/10)
-        l = lightswitchcase(s)
+        l = lightinvert(s)
         return l
     def readTemp():
         t = int(read_temp())
