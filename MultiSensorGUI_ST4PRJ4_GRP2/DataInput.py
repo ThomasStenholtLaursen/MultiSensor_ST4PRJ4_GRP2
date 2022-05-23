@@ -107,8 +107,9 @@ class ForceSensorRead:
 
 
 def convertForceValue(reading):
+        m = round(reading,4)
         x = 1.2152*reading + 3.762
-        j = round(x,5)
+        j = round(x,4)
         y = int(2.7183**j)
         return y
 
