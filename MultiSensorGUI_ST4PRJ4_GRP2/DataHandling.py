@@ -5,17 +5,6 @@ import time
 
 CONSUMERSLEEP = 0.1
 
-def convertForceValue(reading : int):
-    convertedValue = reading*1
-    return convertedValue
-
-def convertTempValue(reading : int):
-    convertedValue = reading*1
-    return convertedValue
-
-def convertLightValue(reading : int):
-    convertedValue = reading*1
-    return convertedValue
 
 class ForceConsumer:
     @property
@@ -67,10 +56,10 @@ class ForceConsumer:
                 dto = work.get()
                 print('Consuming values')
                 print(dto.left, dto.right, dto.bottom,dto.top)
-                ForceConsumer.leftreadingprop = convertForceValue(dto.left)
-                ForceConsumer.rightreadingprop = convertForceValue(dto.right)
-                ForceConsumer.topreadingprop = convertForceValue(dto.top)
-                ForceConsumer.bottomreadingprop = convertForceValue(dto.bottom)
+                ForceConsumer.leftreadingprop = dto.left
+                ForceConsumer.rightreadingprop = dto.right
+                ForceConsumer.topreadingprop = dto.top
+                ForceConsumer.bottomreadingprop = dto.bottom
                 self.notify()
                 print(ForceConsumer.leftreadingprop, ForceConsumer.rightreadingprop, ForceConsumer.topreadingprop, ForceConsumer.bottomreadingprop)
                 
@@ -111,8 +100,8 @@ class LightTempConsumer:
                 litedto = work.get()
                 print('Consuming values')
                 print(litedto.light, litedto.temp)
-                LightTempConsumer.lightreadingprop = convertLightValue(litedto.light)
-                LightTempConsumer.tempreadingprop = convertTempValue(litedto.temp)
+                LightTempConsumer.lightreadingprop = litedto.light
+                LightTempConsumer.tempreadingprop = litedto.temp
                 self.notify()
             else:
                 time.sleep(CONSUMERSLEEP)
