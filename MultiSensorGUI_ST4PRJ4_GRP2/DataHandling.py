@@ -54,14 +54,11 @@ class ForceConsumer:
         while True:
             if not work.empty():
                 dto = work.get()
-                print(dto.left, dto.right, dto.bottom,dto.top)
                 ForceConsumer.leftreadingprop = dto.left
                 ForceConsumer.rightreadingprop = dto.right
                 ForceConsumer.topreadingprop = dto.top
                 ForceConsumer.bottomreadingprop = dto.bottom
-                self.notify()
-                print(ForceConsumer.leftreadingprop, ForceConsumer.rightreadingprop, ForceConsumer.topreadingprop, ForceConsumer.bottomreadingprop)
-                
+                self.notify()              
             else:
                 time.sleep(CONSUMERSLEEP)
 
