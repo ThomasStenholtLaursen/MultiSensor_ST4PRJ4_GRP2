@@ -85,16 +85,16 @@ def lightinvert(i):
         return invert
 
 
+class LightTempSensorRead:
+    
+    def readLight():
+        lightadcvalue = AnalogIn(adslight, ADS.P0)
+        return lightadcvalue.voltage
+        
+    def readTemp():
+        t = int(read_temp())
+        return t
 
-def convertForceValue(reading : int):
-    convertedValue = reading*1
-    return convertedValue
-
-def convertLightValue(reading : int):
-        x = (readLight()/4.94)*100 #gives light input in percentage
-        s = int(x/10)
-        l = lightinvert(s)
-        return l
 
 class ForceSensorRead:
     def read_left():
@@ -110,16 +110,17 @@ class ForceSensorRead:
         v = random.randint(40, 1000)
         return v
 
-class LightTempSensorRead:
-    
-    def readLight():
-        lightadcvalue = AnalogIn(adslight, ADS.P0)
-        return lightadcvalue.voltage
-        
-    def readTemp():
-        t = int(read_temp())
-        return t
-    
+
+def convertForceValue(reading : int):
+    convertedValue = reading*1
+    return convertedValue
+
+def convertLightValue(reading : int):
+        x = (readLight()/4.94)*100 #gives light input in percentage
+        s = int(x/10)
+        l = lightinvert(s)
+        return l
+
 
 class ForceProducer:
     def run(self,queue,finished):
