@@ -125,7 +125,8 @@ def convertLightValue(reading):
 class ForceProducer:
     def run(self,queue,finished):
         finished.put(False)
-        while True:    
+        while True: 
+            print(ForceSensorRead.read_right)
             readingdto = ForceSensorDTO(convertForceValue(ForceSensorRead.read_right()), convertForceValue(ForceSensorRead.read_left()),convertForceValue(ForceSensorRead.read_top()),convertForceValue(ForceSensorRead.read_bottom()))
             queue.put(readingdto)   
             #print("produced: "+ str(reading))
