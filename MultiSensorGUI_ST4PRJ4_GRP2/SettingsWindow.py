@@ -54,16 +54,16 @@ class SettingsWindow(tk.Toplevel):
         self.temp_label.place(y=288, x=503)
 
         self.left_p_label = tk.Label(self, text = self.left_setting, font=("Segoe UI",16), bg='#ffffff')
-        self.left_p_label.place(y=82, x=148)
+        self.left_p_label.place(y=85, x=145)
 
         self.right_p_label = tk.Label(self, text = self.right_setting, font=("Segoe UI",16), bg='#ffffff')
-        self.right_p_label.place(y=162, x=148)
+        self.right_p_label.place(y=165, x=145)
 
         self.top_p_label = tk.Label(self, text = self.top_setting, font=("Segoe UI",16), bg='#ffffff')
-        self.top_p_label.place(y=242, x=148)
+        self.top_p_label.place(y=245, x=145)
 
         self.bottom_p_label = tk.Label(self, text = self.bottom_setting, font=("Segoe UI",16), bg='#ffffff')
-        self.bottom_p_label.place(y=322, x=148)
+        self.bottom_p_label.place(y=325, x=145)
 
 
         self.uparrow = tk.PhotoImage(file='uparrow.png')
