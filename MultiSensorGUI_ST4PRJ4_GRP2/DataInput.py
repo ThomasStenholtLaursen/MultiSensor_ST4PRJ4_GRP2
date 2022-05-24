@@ -11,7 +11,7 @@ from adafruit_ads1x15.analog_in import AnalogIn
 import math as math
 
 
-PRODUCERSLEEP = 0.1
+PRODUCERSLEEP = 0.2
 
 
 #regarding temperature:
