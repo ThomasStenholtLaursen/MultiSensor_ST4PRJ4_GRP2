@@ -70,7 +70,7 @@ class MainWindow(tk.Tk, Observer):
             self.destroy()
 
     def information_message(self):
-        messagebox.showinfo("Information", "------------------LIGHT DETECTION------------------\nRed color = too much light polution\nGreen color = light polution OK\n\n\n-------------TEMPERATURE DETECTION-------------\nRed color = temperature too high\nGreen color = temperature OK\n\n\n------------------FORCE DETECTION------------------\nRed color = too much force (above threshold)\nYellow color = not enough force\nGreen color = adequate force")
+        messagebox.showinfo("Information", "LIGHT DETECTION\nRed color = too much light polution\nGreen color = light polution OK\n\nTEMPERATURE DETECTION\nRed color = temperature too high\nGreen color = temperature OK\n\nFORCE DETECTION\nRed color = too much force (above threshold)\nYellow color = not enough force\nGreen color = adequate force")
 
 
     def update_force(self, subject: Subject) -> None:

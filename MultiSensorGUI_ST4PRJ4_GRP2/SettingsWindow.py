@@ -10,7 +10,7 @@ class SettingsWindow(tk.Toplevel):
         self.geometry('800x480')
         self.resizable(0, 0)
 
-        ###For fullscreen on RPI include the next line of code:
+        ###For fullscreen on RPI include the next line of code###
         self.attributes('-fullscreen', True)
 
         self.title("Settings window")
@@ -46,28 +46,25 @@ class SettingsWindow(tk.Toplevel):
                        command=self.save_settings)                                              
         self.saveButton.pack(side=tk.RIGHT, expand=True)
 
-        #Settings labels
-        #region
-        self.light_label = tk.Label(self, text = self.light_setting, font=("Segoe UI",18), bg='#ffffff', justify="center")
+
+        self.light_label = tk.Label(self, text = self.light_setting, font=("Segoe UI",18), bg='#ffffff')
         self.light_label.place(y=125, x=503)
 
         self.temp_label = tk.Label(self, text = self.temp_setting, font=("Segoe UI",18), bg='#ffffff')
         self.temp_label.place(y=288, x=503)
 
-        self.left_p_label = tk.Label(self, text = self.left_setting, font=("Segoe UI",18), bg='#ffffff')
-        self.left_p_label.place(y=80, x=152)
+        self.left_p_label = tk.Label(self, text = self.left_setting, font=("Segoe UI",16), bg='#ffffff')
+        self.left_p_label.place(y=82, x=148)
 
-        self.right_p_label = tk.Label(self, text = self.right_setting, font=("Segoe UI",18), bg='#ffffff')
-        self.right_p_label.place(y=160, x=152)
+        self.right_p_label = tk.Label(self, text = self.right_setting, font=("Segoe UI",16), bg='#ffffff')
+        self.right_p_label.place(y=162, x=148)
 
-        self.top_p_label = tk.Label(self, text = self.top_setting, font=("Segoe UI",18), bg='#ffffff')
-        self.top_p_label.place(y=240, x=152)
+        self.top_p_label = tk.Label(self, text = self.top_setting, font=("Segoe UI",16), bg='#ffffff')
+        self.top_p_label.place(y=242, x=148)
 
-        self.bottom_p_label = tk.Label(self, text = self.bottom_setting, font=("Segoe UI",18), bg='#ffffff')
-        self.bottom_p_label.place(y=320, x=152)
-        #endregion
-        #Inc/dec buttons
-        #region
+        self.bottom_p_label = tk.Label(self, text = self.bottom_setting, font=("Segoe UI",16), bg='#ffffff')
+        self.bottom_p_label.place(y=322, x=148)
+
 
         self.uparrow = tk.PhotoImage(file='uparrow.png')
         self.downarrow = tk.PhotoImage(file='downarrow.png')
@@ -101,7 +98,13 @@ class SettingsWindow(tk.Toplevel):
         self.bottom_p_button1.place(y=309, x=320)
         self.bottom_p_button2 = tk.Button(self, image = self.uparrow, bg = "#424242", height=60, width=45, bd='1', command=self.inc_p_bottom)
         self.bottom_p_button2.place(y=309, x=250)
-        #endregion
+
+        self.information = tk.PhotoImage(file='info.png')
+        self.information_button = tk.Button(self, image = self.information, bg = "#08b5b5", activebackground='#08b5b5', bd='0', command=self.guide_message)
+        self.information_button.place(y=10, x=750)
+
+    def guide_message(self):
+        messagebox.showinfo("Guide", "FORCE THRESHOLD\nSet threshold-value in grams\nfor too much force applied\n\nLIGHT THRESHOLD\nSet threshold-value in a scale of 1-10\nfor how much light-polution is allowed\n\nTEMPERATURE THRESHOLD\nSet threshold-value for maximum\nallowed temperature")
 
 
     def close_confirm(self):
@@ -117,14 +120,14 @@ class SettingsWindow(tk.Toplevel):
         else:
             self.destroy()
 
-    def save_settings(self):
-         messagebox.showinfo(parent=self, message='Settings saved')        
+    def save_settings(self):       
          settings.RIGHTSETTING = self.right_setting
          settings.LEFTSETTING = self.left_setting
          settings.TOPSETTING = self.top_setting
          settings.BOTTOMSETTING = self.bottom_setting
          settings.LIGHTSETTING = self.light_setting
          settings.TEMPSETTING = self.temp_setting
+         messagebox.showinfo(parent=self, message='Settings saved') 
          self.destroy()
 
     def inc_light(self):
