@@ -122,22 +122,18 @@ def convertLightValue(reading):
 
 
 class ForceProducer:
-    def run(self,queue,finished):
-        finished.put(False)
+    def run(self,queue):
         while True:
             readingdto = ForceSensorDTO(convertForceValue(ForceSensorRead.read_right()), convertForceValue(ForceSensorRead.read_left()),convertForceValue(ForceSensorRead.read_top()),convertForceValue(ForceSensorRead.read_bottom()))
             queue.put(readingdto)   
             print("force reading:" + str(readingdto.right) + " , " + str(readingdto.left) + " , " + str(readingdto.top) + " , " + str(readingdto.bottom))
             time.sleep(PRODUCERSLEEP)
-        finished.put(True)
 
 
 class LightTempProducer:
-    def run(self,queue,finished):
-        finished.put(False)
+    def run(self,queue):
         while True:
             lightTempReading = LightTempDTO(convertLightValue(LightTempSensorRead.readLight()), LightTempSensorRead.readTemp())
             queue.put(lightTempReading) 
             time.sleep(PRODUCERSLEEP)
-        finished.put(True)
     

@@ -48,12 +48,12 @@ class ForceConsumer:
         for observer in self._observers:
             observer.update_force(self)
 
-    def run(self,work,finished):
+    def run(self,force_queue):
         dto = ForceSensorDTO
         
         while True:
-            if not work.empty():
-                dto = work.get()
+            if not force_queue.empty():
+                dto = force_queue.get()
                 ForceConsumer.leftreadingprop = dto.left
                 ForceConsumer.rightreadingprop = dto.right
                 ForceConsumer.topreadingprop = dto.top
@@ -89,11 +89,11 @@ class LightTempConsumer:
         for observer in self._observers:
             observer.update_lt(self)
 
-    def run(self,work,finished):
+    def run(self,lighttemp_queue):
         litedto = LightTempDTO
         while True:
-            if not work.empty():
-                litedto = work.get()
+            if not lighttemp_queue.empty():
+                litedto = lighttemp_queue.get()
                 LightTempConsumer.lightreadingprop = litedto.light
                 LightTempConsumer.tempreadingprop = litedto.temp
                 self.notify()
