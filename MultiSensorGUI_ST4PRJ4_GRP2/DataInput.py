@@ -49,7 +49,6 @@ adslight = ADS.ADS1015(i2c=i2c,gain=2/3, address=0x48)
 adsforce = ADS.ADS1015(i2c=i2c,gain=1, address=0x49)
 
 
-#time.sleep(1)
 
 def lightinvert(i):
         invert = 0
@@ -142,4 +141,3 @@ class LightTempProducer:
             time.sleep(PRODUCERSLEEP)
         finished.put(True)
     
-
