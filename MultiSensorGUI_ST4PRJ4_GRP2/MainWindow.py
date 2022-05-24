@@ -33,8 +33,8 @@ class MainWindow(tk.Tk, Observer):
         self.light = tk.Canvas(self, width=10, height =10, bg ='#00ff30', bd=10)
         self.light.place(y=125,x=132)
 
-        self.temp_label = tk.Label(self, font=("Segoe UI", 20), bg='#424242',fg=RED)
-        self.temp_label.place(y=300, x=130)
+        self.temp = tk.Label(self, font=("Segoe UI", 20), bg='#424242',fg=RED)
+        self.temp.place(y=300, x=130)
 
         self.information = tk.PhotoImage(file='info.png')
         self.information_button = tk.Button(self, image = self.information, bg = "#08b5b5", activebackground='#08b5b5', bd='0', command=self.information_message)
@@ -109,8 +109,8 @@ class MainWindow(tk.Tk, Observer):
         else:
             self.light.configure(bg=GREEN)
        
-        self.temp_label.configure(text=str(subject.tempreadingprop) + ' \N{DEGREE SIGN}C')
+        self.temp.configure(text=str(subject.tempreadingprop) + ' \N{DEGREE SIGN}C')
         if subject.tempreadingprop > settings.TEMPSETTING:
-            self.temp_label.configure(fg=RED)
+            self.temp.configure(fg=RED)
         else:
-            self.temp_label.configure(fg=GREEN)
+            self.temp.configure(fg=GREEN)
