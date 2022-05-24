@@ -11,7 +11,7 @@ class SettingsWindow(tk.Toplevel):
         self.resizable(0, 0)
 
         ###For fullscreen on RPI include the next line of code:
-        #self.attributes('-fullscreen', True)
+        self.attributes('-fullscreen', True)
 
         self.title("Settings window")
 
