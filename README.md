@@ -8,7 +8,7 @@
 1. Write a new image to your SD-card for your raspberry pi. You can follow the guide on [this website](https://www.raspberrypi.com/documentation/computers/getting-started.html#using-raspberry-pi-imager).
 2. Open Raspberry Pi Imager and click on the settings icon (or press ctrl+shift+x).
 3. Enable **SHH**.
-4. Mark **hostname** and choose a password.
+4. Mark **hostname** and choose a **password**.
 5. Mark **Configure wireless LAN** and type the SSID and password the for Wifi.
 6. Insert the SD-card and connect power and (dont connect display yet).
 7. When the green LED on the raspberry pi has stopped blinking you can connect the screen and reboot (pull and reconnect power).
