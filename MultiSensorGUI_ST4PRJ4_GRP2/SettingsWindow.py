@@ -104,7 +104,7 @@ class SettingsWindow(tk.Toplevel):
         self.information_button.place(y=10, x=750)
 
     def guide_message(self):
-        messagebox.showinfo("Guide", "FORCE THRESHOLD\nSet threshold-value in grams\nfor too much force applied\n\nLIGHT THRESHOLD\nSet threshold-value in a scale of 1-10\nfor how much light-polution is allowed\n\nTEMPERATURE THRESHOLD\nSet threshold-value for maximum\nallowed temperature")
+        messagebox.showinfo(parent=self, title="Guide", message="FORCE THRESHOLD\nSet threshold-value in grams\nfor too much force applied\n\nLIGHT THRESHOLD\nSet threshold-value in a scale of 1-10\nfor how much light-polution is allowed\n\nTEMPERATURE THRESHOLD\nSet threshold-value for maximum\nallowed temperature")
 
 
     def close_confirm(self):
