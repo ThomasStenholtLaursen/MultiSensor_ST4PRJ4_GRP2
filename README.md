@@ -1,5 +1,3 @@
-# MultiSensor_ST4PRJ4_GRP2
-
 # Multi-sensor-system
 
 ## This code needs to run on Raspberry Pi (Model 3B+ or above)
