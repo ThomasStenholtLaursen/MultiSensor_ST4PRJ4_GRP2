@@ -106,7 +106,7 @@ class SettingsWindow(tk.Toplevel):
     def guide_message(self):
         messagebox.showinfo(parent=self, title="Guide", message="FORCE THRESHOLD\nSet threshold-value in grams\nfor too much force applied\n\nLIGHT THRESHOLD\nSet threshold-value in a scale of 1-10\nfor how much light-polution is allowed\n\nTEMPERATURE THRESHOLD\nSet threshold-value for maximum\nallowed temperature")
 
-
+    #Method to check if setting attributes is changed. If not the window closes without messagebox:
     def close_confirm(self):
         if (settings.RIGHTSETTING != self.right_setting 
             or settings.LEFTSETTING != self.left_setting
@@ -119,7 +119,7 @@ class SettingsWindow(tk.Toplevel):
                 self.destroy()
         else:
             self.destroy()
-
+    #Saves the settings
     def save_settings(self):       
          settings.RIGHTSETTING = self.right_setting
          settings.LEFTSETTING = self.left_setting
@@ -130,6 +130,7 @@ class SettingsWindow(tk.Toplevel):
          messagebox.showinfo(parent=self, message='Settings saved') 
          self.destroy()
 
+    #Incerement and decrement methods for the setting buttons:
     def inc_light(self):
         self.light_setting += settings.INC_L
         if self.light_setting >= 10:

@@ -27,7 +27,7 @@ def main():
     ForceConsumerThread = Thread(target=forcecon.run,args=[force_queue])
     lightTempProducerThread = Thread(target=lighttempprod.run,args=[lighttemp_queue])
     lightTempConsumerThread = Thread(target=lighttempcon.run,args=[lighttemp_queue])
-
+    #Making threads backgroundthreads
     ForceProducerThread.daemon = True
     ForceConsumerThread.daemon = True
     lightTempProducerThread.daemon = True
@@ -41,7 +41,8 @@ def main():
 
     ###For fullscreen on RPI include the next line of code###
     app.attributes('-fullscreen', True)
-
+    
+    #after 0 seconds, start the background threads:
     app.after(0, runSensorThreads)
     
     app.mainloop()

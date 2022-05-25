@@ -51,7 +51,7 @@ class ForceConsumer:
     def run(self,force_queue):
         dto = ForceSensorDTO
         
-        while True:
+        while True: #if the queue is not empty, takes the dto out, and sets the propertys according to values in DTO.
             if not force_queue.empty():
                 dto = force_queue.get()
                 ForceConsumer.leftreadingprop = dto.left
@@ -91,7 +91,7 @@ class LightTempConsumer:
 
     def run(self,lighttemp_queue):
         litedto = LightTempDTO
-        while True:
+        while True: #if the queue is not empty, takes the dto out, and sets the propertys according to values in DTO.
             if not lighttemp_queue.empty():
                 litedto = lighttemp_queue.get()
                 LightTempConsumer.lightreadingprop = litedto.light
