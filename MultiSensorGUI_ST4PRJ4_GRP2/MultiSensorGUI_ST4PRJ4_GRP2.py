@@ -4,7 +4,7 @@ from DataHandling import LightTempConsumer as LTConsumer
 from DataInput import ForceProducer as FProducer
 from DataInput import LightTempProducer as LTProducer
 from threading import Thread
-from queue import Queue
+from queue import LifoQueue
 import threading
 import multiprocessing
 
@@ -12,8 +12,8 @@ def main():
 
     app = MainWindow()
     
-    force_queue = Queue()    
-    lighttemp_queue = Queue()    
+    force_queue = LifoQueue()    
+    lighttemp_queue = LifoQueue()    
 
     forceprod = FProducer()
     forcecon = FConsumer()
