@@ -48,8 +48,8 @@ def read_temp():
 i2c = busio.I2C(board.SCL, board.SDA)
 
 # Create the ADC object using the I2C bus
-adslight = ADS.ADS1015(i2c=i2c,gain=2/3, address=0x48)
-adsforce = ADS.ADS1015(i2c=i2c,gain=1, address=0x49)
+adslight = ADS.ADS1015(i2c=i2c,gain=2/3, address=0x49)
+adsforce = ADS.ADS1015(i2c=i2c,gain=1, address=0x48)
 
 
 
